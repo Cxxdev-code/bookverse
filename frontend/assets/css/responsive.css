@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  nav {
+    flex-direction: column;
+  }
+}
