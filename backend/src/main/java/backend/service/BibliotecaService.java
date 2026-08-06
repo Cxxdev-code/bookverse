@@ -8,7 +8,6 @@ import backend.Entity.AutorEntity;
 import backend.Entity.CategoriaEntity;
 import backend.Entity.LivroEntity;
 import backend.dto.Request.LivroDto;
-import backend.dto.Response.AdicionarLivroResponse;
 import backend.dto.Response.LivroResponse;
 import backend.exception.categoria.CategoriaNaoEncontradaException;
 import backend.exception.livro.LivroJaExistenteException;
@@ -35,7 +34,7 @@ public class BibliotecaService {
         return livroMapper.converterParaListaDeResponse(listaDeLivros);
     }
 
-    public AdicionarLivroResponse adicionarLivro(LivroDto livroDto) {
+    public LivroResponse adicionarLivro(LivroDto livroDto) {
         String titulo = livroDto.getTitulo();
         if (livroRepository.existsByTitulo(titulo)) {
             throw new LivroJaExistenteException("Livro Já cadastrado com Titulo: " + titulo);   
@@ -51,6 +50,7 @@ public class BibliotecaService {
         // 2. Montar a entidade de Livro utilizando os objetos encontrados no banco
         LivroEntity livroAdicionado = LivroEntity.builder()
             .titulo(livroDto.getTitulo())
+            .isbn(livroDto.getIsbn())
             .descricao(livroDto.getDescricao())
             .dataPublicacao(livroDto.getPublicado())
             .autor(autor)         // Atribui a entidade Autor completa
@@ -59,9 +59,10 @@ public class BibliotecaService {
 
         livroRepository.save(livroAdicionado);
             
-        AdicionarLivroResponse response = new AdicionarLivroResponse();
+        LivroResponse response = livroMapper.converterParaResponse(livroAdicionado);
         response.setAutor(autor.getNome());
         response.setTitulo(livroDto.getTitulo());
+
 
         return response;
     }  

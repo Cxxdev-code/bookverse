@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import backend.dto.Request.LivroDto;
-import backend.dto.Response.AdicionarLivroResponse;
 import backend.dto.Response.LivroResponse;
 import backend.service.BibliotecaService;
 import jakarta.validation.Valid;
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/livros")
 @AllArgsConstructor
@@ -31,14 +30,14 @@ public class BibliotecaController {
     
     private final BibliotecaService bibliotecaService;
 
-    @GetMapping
+    @GetMapping("/todos")
     public List<LivroResponse> buscarTodosOsLivros() {
 
         return bibliotecaService.buscarTodosOsLivros();
     }
 
     @PostMapping
-    public AdicionarLivroResponse adicionarLivro(@Valid @RequestBody  LivroDto livrodto) {
+    public LivroResponse adicionarLivro(@Valid @RequestBody  LivroDto livrodto) {
 
         return bibliotecaService.adicionarLivro(livrodto);
     }

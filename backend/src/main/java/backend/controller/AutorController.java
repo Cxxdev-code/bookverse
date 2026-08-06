@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/autores")
 @AllArgsConstructor
@@ -34,7 +34,7 @@ public class AutorController {
         return autorService.criarAutor(autorDto);
     }
 
-    @GetMapping
+    @GetMapping("/todos")
     public List<AutorResponse> buscarAutores(){
         return autorService.buscarTodosAutores();
     }

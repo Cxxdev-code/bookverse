@@ -16,6 +16,7 @@ public class LivroMapper {
     public LivroResponse converterParaResponse(LivroEntity livro) {
         return LivroResponse.builder()
                 .id(livro.getId())
+                .isbn(livro.getIsbn())
                 .titulo(livro.getTitulo())
                 .descricao(livro.getDescricao())
                 // Acessamos o objeto relacional e pegamos a string amigável

@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-GestaoCustosApplication<gestao-custos>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "backend.GestaoCustosApplication",
+            "projectName": "gestao-custos",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

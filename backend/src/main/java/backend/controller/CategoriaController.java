@@ -17,7 +17,7 @@ import backend.dto.Response.CategoriaResponse;
 import backend.service.CategoriaService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/categorias")
 @AllArgsConstructor
