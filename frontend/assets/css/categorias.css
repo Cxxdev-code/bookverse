@@ -1,0 +1,126 @@
+.category-header .library-stats {
+    justify-content: center;
+}
+
+.categories-section {
+    padding: 80px 0 100px;
+}
+
+.library-result h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 12px 0 8px;
+}
+
+.library-result p,
+.empty-state p {
+    color: var(--text-secondary);
+}
+
+.library-result strong {
+    color: var(--gold);
+}
+
+.category-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    gap: 22px;
+    padding: 30px;
+    background: linear-gradient(145deg, var(--surface), #1a2230);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.category-card::after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    right: -75px;
+    bottom: -90px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, .08);
+    transition: var(--transition);
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(212, 175, 55, .55);
+    box-shadow: var(--shadow-hover);
+}
+
+.category-card:hover::after {
+    transform: scale(1.5);
+}
+
+.category-icon {
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    flex: 0 0 60px;
+    width: 60px;
+    height: 60px;
+    color: #15191e;
+    background: var(--gold);
+    border-radius: 16px;
+    font-size: 1.5rem;
+}
+
+.category-card-content {
+    position: relative;
+    z-index: 1;
+}
+
+.category-count {
+    display: block;
+    color: var(--gold);
+    font-size: .82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+}
+
+.category-card h3 {
+    margin: 7px 0 10px;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.category-card p {
+    min-height: 48px;
+    margin: 0 0 17px;
+    color: var(--text-secondary);
+    font-size: .92rem;
+    line-height: 1.7;
+}
+
+.category-link {
+    color: var(--gold);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.category-link i {
+    display: inline-block;
+    margin-left: 5px;
+    transition: var(--transition);
+}
+
+.category-link:hover { color: var(--gold-light); }
+.category-link:hover i { transform: translateX(5px); }
+
+.empty-state {
+    padding: 55px 20px;
+    color: var(--text-secondary);
+}
+
+.empty-state i { color: #718096; }
+.empty-state h3 { margin: 20px 0 8px; color: var(--text); }
+
+@media (max-width: 576px) {
+    .categories-section { padding-top: 55px; }
+    .category-card { padding: 24px; gap: 16px; }
+    .category-icon { flex-basis: 52px; width: 52px; height: 52px; }
+}

@@ -1,12 +1,27 @@
-hero{
+.hero{
 
-    padding:120px 0;
+    position:relative;
 
-    min-height:90vh;
+    overflow:hidden;
 
-    display:flex;
+    padding-top:170px;
 
-    align-items:center;
+    padding-bottom:120px;
+
+    background:
+    radial-gradient(circle at top right,
+    rgba(212,175,55,.15),
+    transparent 30%),
+
+    radial-gradient(circle at bottom left,
+    rgba(255,255,255,.03),
+    transparent 35%),
+
+    linear-gradient(
+    180deg,
+    #0D1117,
+    #111827,
+    #0D1117);
 
 }
 
@@ -38,19 +53,25 @@ hero{
 
     display:inline-block;
 
-    background:rgba(212,175,55,.15);
-
-    color:#D4AF37;
-
     padding:10px 22px;
 
-    border-radius:40px;
+    border-radius:50px;
+
+    background:rgba(212,175,55,.12);
+
+    color:var(--gold);
+
+    border:1px solid rgba(212,175,55,.35);
 
     font-weight:600;
+
+    margin-bottom:25px;
 
 }
 
 .hero-buttons{
+
+    margin-top:40px;
 
     display:flex;
 
@@ -78,6 +99,9 @@ hero{
 
 }
 
+
+
+
 .btn-book:hover{
 
     background:#F5C542;
@@ -85,6 +109,26 @@ hero{
     color:#111827;
 
     transform:translateY(-4px);
+
+}
+
+.btn-outline-light{
+
+    border:2px solid var(--gold);
+
+    color:var(--gold);
+
+    border-radius:15px;
+
+    padding:15px 35px;
+
+}
+
+.btn-outline-light:hover{
+
+    background:var(--gold);
+
+    color:#111;
 
 }
 
@@ -122,13 +166,73 @@ hero{
 
 }
 
-.hero-book img{
+.hero-image{
 
-    width:85%;
+    transition:.5s;
 
-    filter:drop-shadow(0 25px 35px rgba(0,0,0,.5));
+    width:100%;
+
+    max-width:470px;
+
+    filter:
+
+        drop-shadow(0 0 40px rgba(212,175,55,.18));
 
     animation:flutuar 5s ease-in-out infinite;
+
+}
+
+.hero-image:hover{
+
+    transform:
+
+        scale(1.03)
+
+        rotate(-2deg);
+
+}
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+
+    height:500px;
+
+    background:rgba(212,175,55,.08);
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    right:-120px;
+
+    top:20px;
+
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:350px;
+
+    height:350px;
+
+    left:-100px;
+
+    bottom:-120px;
+
+    border-radius:50%;
+
+    background:rgba(212,175,55,.05);
+
+    filter:blur(120px);
 
 }
 

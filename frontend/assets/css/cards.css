@@ -101,3 +101,71 @@
     box-shadow:0 18px 35px rgba(0,0,0,.45);
 
 }
+
+.featured-books{
+
+    padding:100px 0;
+
+}
+
+.section-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:end;
+
+    margin-bottom:50px;
+
+}
+
+.section-tag{
+
+    color:var(--gold);
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+}
+
+.section-header h2{
+
+    font-size:2.8rem;
+
+    font-weight:700;
+
+    margin-top:10px;
+
+}
+
+.see-all{
+
+    color:var(--gold);
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.see-all:hover{
+
+    color:white;
+
+}
+
+
+.author-avatar {
+    text-align: center;
+    padding-top: 24px;
+    font-size: 4.5rem;
+    color: var(--gold);
+}

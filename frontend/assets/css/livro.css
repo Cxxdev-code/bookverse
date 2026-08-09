@@ -1,0 +1,377 @@
+.library-header{
+
+    padding:170px 0 90px;
+
+    text-align:center;
+
+    background:
+        radial-gradient(circle at top right,
+        rgba(212,175,55,.12),
+        transparent 30%),
+
+        radial-gradient(circle at bottom left,
+        rgba(255,255,255,.03),
+        transparent 40%),
+
+        linear-gradient(
+            180deg,
+            #0D1117,
+            #111827,
+            #0D1117
+        );
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.library-header::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+
+    height:450px;
+
+    border-radius:50%;
+
+    background:rgba(212,175,55,.08);
+
+    right:-100px;
+
+    top:-80px;
+
+    filter:blur(120px);
+
+}
+
+.library-header h1{
+
+    color:var(--text);
+
+    font-size:3.2rem;
+
+    font-weight:700;
+
+    margin:20px 0;
+
+}
+
+.library-header p{
+
+    color:var(--text-secondary);
+
+    font-size:1.15rem;
+
+    max-width:650px;
+
+    margin:auto;
+
+    line-height:1.8;
+
+}
+
+/* ===========================
+   PESQUISA
+=========================== */
+
+.library-search{
+
+    padding:45px 0;
+
+}
+
+.search-panel{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.search-input{
+
+    display:flex;
+
+    align-items:center;
+
+    width:700px;
+
+    max-width:100%;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+}
+
+.search-input i{
+
+    color:var(--gold);
+
+    padding:0 20px;
+
+    font-size:1.1rem;
+
+}
+
+.search-input input{
+
+    flex:1;
+
+    border:none;
+
+    background:none;
+
+    color:var(--text);
+
+    padding:18px 0;
+
+    outline:none;
+
+}
+
+.search-input input::placeholder{
+
+    color:var(--text-secondary);
+
+}
+
+/* ===========================
+   FILTROS
+=========================== */
+
+.library-filters{
+
+    padding-bottom:35px;
+
+}
+
+.filter-list{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.filter-item{
+
+    border:none;
+
+    padding:10px 22px;
+
+    border-radius:30px;
+
+    background:var(--surface);
+
+    color:var(--text);
+
+    transition:.3s;
+
+}
+
+.filter-item:hover{
+
+    background:var(--gold);
+
+    color:#111;
+
+}
+
+.filter-item.active{
+
+    background:var(--gold);
+
+    color:#111;
+
+}
+
+/* ===========================
+   TOPO
+=========================== */
+
+.library-info{
+
+    padding-bottom:30px;
+
+}
+
+.library-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+}
+
+.library-top p{
+
+    color:var(--text-secondary);
+
+    margin:0;
+
+}
+
+.library-top span{
+
+    color:var(--gold);
+
+    font-weight:700;
+
+}
+
+.library-top select{
+
+    width:220px;
+
+    background:var(--surface);
+
+    color:var(--text);
+
+    border:1px solid var(--border);
+
+}
+
+/* ===========================
+   LIVROS
+=========================== */
+
+.library-books{
+
+    padding-bottom:70px;
+
+}
+
+#listaLivros{
+
+    row-gap:35px;
+
+}
+
+/* ===========================
+   PAGINAÇÃO
+=========================== */
+
+.library-pagination{
+
+    padding-bottom:80px;
+
+}
+
+.pagination .page-link{
+
+    background:var(--surface);
+
+    color:var(--text);
+
+    border:1px solid var(--border);
+
+    margin:0 5px;
+
+    border-radius:10px;
+
+    transition:.3s;
+
+}
+
+.pagination .page-link:hover{
+
+    background:var(--gold);
+
+    color:#111;
+
+}
+
+.pagination .active .page-link{
+
+    background:var(--gold);
+
+    color:#111;
+
+    border-color:var(--gold);
+
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media(max-width:992px){
+
+    .library-header h1{
+
+        font-size:2.5rem;
+
+    }
+
+    .search-panel{
+
+        flex-direction:column;
+
+    }
+
+    .search-input{
+
+        width:100%;
+
+    }
+
+    .library-top{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .library-top select{
+
+        width:100%;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .library-header{
+
+        padding-top:120px;
+
+    }
+
+    .library-header h1{
+
+        font-size:2rem;
+
+    }
+
+    .filter-list{
+
+        justify-content:center;
+
+    }
+
+}

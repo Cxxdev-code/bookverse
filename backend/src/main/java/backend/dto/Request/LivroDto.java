@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class LivroDto {
     
 
     @NotBlank(message = "A descrição é obrigatória")
+    @Size(max = 5000, message = "A descriçao deve ter no máximo 5000 caracteres")
     private String descricao;
 
     private LocalDate publicado;

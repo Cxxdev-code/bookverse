@@ -40,6 +40,7 @@ public class LivroEntity {
     private String titulo;
 
     @NotBlank
+    @Column(nullable = false, length = 5000)
     private String descricao;
 
     @ManyToOne

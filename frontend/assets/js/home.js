@@ -4,37 +4,60 @@ function criarCardLivro(livro) {
 
     return `
 
-        <div class="col-lg-3 col-md-6 mb-4">
+    <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
 
-            <div class="book-card">
+        <div class="book-card h-100">
 
-                <img src="assets/img/baner.png"
-                     alt="${livro.titulo}">
+            <img
+                src="assets/img/capa2.jpg"
+                alt="${livro.titulo}">
 
-                <div class="book-info">
+            <div class="book-info">
 
-                    <h5>${livro.titulo}</h5>
+                <span class="categoria-badge">
 
-                    <span>${livro.autor}</span>
+                    ${livro.categoria}
 
-                    <small>${livro.categoria}</small>
+                </span>
 
-                    <a href="#"
-                       class="btn btn-book w-100 mt-3">
+                <h5>
 
-                        Ler
+                    ${livro.titulo}
 
-                    </a>
+                </h5>
 
-                </div>
+                <p>
+
+                    ${livro.autor}
+
+                </p>
+
+                <small>
+
+                    ISBN:
+                    ${livro.isbn}
+
+                </small>
+
+                <button
+                    class="btn btn-book mt-3 w-100">
+
+                    📖 Ler Livro
+
+                </button>
 
             </div>
 
         </div>
 
+    </div>
+
     `;
 
 }
+
+
+
 
 async function carregarLivros() {
 

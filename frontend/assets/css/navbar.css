@@ -1,182 +1,157 @@
-/* ===========================
-   NAVBAR
-=========================== */
+.navbar-bookverse{
 
-.navbar {
+    background:rgba(13,17,23,.75);
 
-    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter:blur(15px);
 
-    backdrop-filter: blur(15px);
+    border-bottom:1px solid var(--border);
 
-    border-bottom: 1px solid rgba(212, 175, 55, .15);
-
-    padding: 12px 0;
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 999;
-
-    transition: .3s;
-}
-
-/* ===========================
-   LOGO
-=========================== */
-
-.navbar-brand {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 0.5rem;
-
-    font-size: 1.8rem;
-
-    font-weight: 700;
-
-    color: #FFFFFF;
-
-    transition: .3s;
+    transition:var(--transition);
 
 }
 
-.navbar-brand img {
+.navbar-brand{
 
-    width: 42px;
+    color:var(--gold)!important;
 
-    height: auto;
+    font-size:1.6rem;
 
-    display: block;
-
-}
-
-.navbar-brand:hover {
-
-    color: #D4AF37;
-
-    transform: scale(1.05);
+    font-weight:700;
 
 }
 
-/* ===========================
-   LINKS
-=========================== */
+.navbar-brand i{
 
-.nav-link {
-
-    color: #E2E8F0;
-
-    font-weight: 500;
-
-    margin-left: 18px;
-
-    position: relative;
-
-    transition: .3s;
+    margin-right:8px;
 
 }
 
-.nav-link:hover {
+.nav-link{
 
-    color: #D4AF37;
+    color:var(--text)!important;
 
-}
+    font-weight:500;
 
-.nav-link::after {
+    margin:0 10px;
 
-    content: "";
+    position:relative;
 
-    position: absolute;
-
-    left: 0;
-
-    bottom: -8px;
-
-    width: 0;
-
-    height: 2px;
-
-    background: #D4AF37;
-
-    transition: .3s;
+    transition:var(--transition);
 
 }
 
-.nav-link:hover::after {
+.nav-link:hover{
 
-    width: 100%;
-
-}
-
-/* ===========================
-   PESQUISA
-=========================== */
-
-.navbar form {
-
-    width: 42%;
+    color:var(--gold)!important;
 
 }
 
-.form-control {
+.nav-link::after{
 
-    background: #1E293B;
+    content:"";
 
-    border: 1px solid transparent;
+    position:absolute;
 
-    color: white;
+    left:0;
 
-    border-radius: 12px;
+    bottom:-6px;
 
-    padding: 12px 18px;
+    width:0;
 
-    transition: .3s;
+    height:2px;
 
-}
+    background:var(--gold);
 
-.form-control::placeholder {
-
-    color: #94A3B8;
+    transition:var(--transition);
 
 }
 
-.form-control:focus {
+.nav-link:hover::after{
 
-    background: #1E293B;
-
-    color: white;
-
-    border: 1px solid #D4AF37;
-
-    box-shadow: 0 0 15px rgba(212,175,55,.25);
+    width:100%;
 
 }
 
-/* ===========================
-   PERFIL
-=========================== */
+.search-box{
 
-.bi-person-circle {
+    width:260px;
 
-    margin-right: 5px;
+    margin-left:20px;
 
 }
 
-/* ===========================
-   BOTÃO HAMBURGUER
-=========================== */
+.search-box input{
 
-.navbar-toggler {
+    background:var(--surface);
 
-    border: none;
+    border:1px solid var(--border);
+
+    color:var(--text);
+
+    border-radius:50px;
 
 }
 
-.navbar-toggler:focus {
+.search-box input::placeholder{
 
-    box-shadow: none;
+    color:var(--text-secondary);
+
+}
+
+.search-box input:focus{
+
+    border-color:var(--gold);
+
+    box-shadow:0 0 15px rgba(212,175,55,.4);
+
+    background:var(--surface);
+
+    color:white;
+
+}
+
+.perfil-btn{
+
+    color:var(--gold);
+
+    font-size:1.8rem;
+
+    margin-left:20px;
+
+    transition:var(--transition);
+
+}
+
+.perfil-btn:hover{
+
+    transform:scale(1.15);
+
+    color:var(--gold-light);
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px){
+
+    .nav-link{
+
+        margin:0 6px;
+
+        font-size:.92rem;
+
+    }
+
+    .search-box{
+
+        width:210px;
+
+        margin-left:12px;
+
+    }
+
+    .perfil-btn{
+
+        margin-left:12px;
+
+    }
 
 }

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar livro | BookVerse</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/hero.css">
+    <link rel="stylesheet" href="assets/css/livro.css">
+    <link rel="stylesheet" href="assets/css/adicionar.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-bookverse">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-book-half"></i>BookVerse</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="livros.html">Biblioteca</a></li>
+                    <li class="nav-item"><a class="nav-link" href="autores.html">Autores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="categorias.html">Categorias</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="adicionar.html">Adicionar</a></li>
+                </ul>
+                <form class="d-flex search-box" role="search" onsubmit="return false;"><input class="form-control" type="search" placeholder="Pesquisar livros..." aria-label="Pesquisar livros" autocomplete="off"></form>
+                <a href="perfil.html" class="perfil-btn" aria-label="Abrir perfil"><i class="bi bi-person-circle"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="add-hero">
+            <div class="container">
+                <span class="section-tag"><i class="bi bi-plus-circle-fill"></i> Novo registro</span>
+                <h1>Adicione uma nova <span class="gold">história</span></h1>
+                <p>Cadastre o livro e, se necessário, crie o autor ou a categoria sem sair desta página.</p>
+            </div>
+        </section>
+
+        <section class="add-content">
+            <div class="container">
+                <div class="add-progress" aria-label="Etapas do cadastro">
+                    <div class="progress-step active"><span>1</span><strong>Livro</strong></div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step"><span>2</span><strong>Autor</strong></div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step"><span>3</span><strong>Categoria</strong></div>
+                </div>
+
+                <div id="mensagemFormulario" class="form-message d-none" role="alert"></div>
+
+                <form id="formAdicionarLivro" novalidate>
+                    <div class="row g-4">
+                        <div class="col-lg-7">
+                            <article class="form-panel">
+                                <div class="panel-heading"><span class="panel-icon"><i class="bi bi-book"></i></span><div><h2>Dados do livro</h2><p>Informações que serão exibidas na biblioteca.</p></div></div>
+                                <div class="row g-3">
+                                    <div class="col-12"><label for="titulo" class="form-label">Título</label><input id="titulo" class="form-control form-book" type="text" maxlength="255" required placeholder="Ex.: Clean Code"></div>
+                                    <div class="col-md-7"><label for="isbn" class="form-label">ISBN</label><input id="isbn" class="form-control form-book" type="text" required placeholder="Ex.: 978-0132350884"></div>
+                                    <div class="col-md-5"><label for="publicado" class="form-label">Data de publicação</label><input id="publicado" class="form-control form-book" type="date" required></div>
+                                    <div class="col-12"><label for="descricao" class="form-label">Descrição</label><textarea id="descricao" class="form-control form-book" rows="6" required placeholder="Conte brevemente sobre este livro..."></textarea></div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="col-lg-5">
+                            <aside class="add-tip h-100">
+                                <i class="bi bi-lightbulb-fill"></i>
+                                <h2>Cadastro inteligente</h2>
+                                <p>Você pode escolher registros já existentes. Se eles ainda não estiverem no BookVerse, preencha os dados logo abaixo.</p>
+                                <div class="tip-item"><i class="bi bi-check2"></i> Autor e categoria são vinculados automaticamente.</div>
+                                <div class="tip-item"><i class="bi bi-check2"></i> Os campos extras só são exigidos quando você criar um novo cadastro.</div>
+                            </aside>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <article class="form-panel relation-panel">
+                                <div class="panel-heading"><span class="panel-icon"><i class="bi bi-person-fill"></i></span><div><h2>Autor</h2><p>Escolha quem escreveu o livro.</p></div></div>
+                                <div class="choice-buttons" role="group" aria-label="Forma de escolher autor">
+                                    <button class="choice-button active" type="button" data-tipo="autor" data-modo="existente"><i class="bi bi-person-check"></i> Autor existente</button>
+                                    <button class="choice-button" type="button" data-tipo="autor" data-modo="novo"><i class="bi bi-person-plus"></i> Cadastrar autor</button>
+                                </div>
+                                <div id="autorExistente" class="relation-content"><label for="autorId" class="form-label">Selecione o autor</label><select id="autorId" class="form-select form-book" required><option value="">Carregando autores...</option></select></div>
+                                <div id="autorNovo" class="relation-content d-none">
+                                    <div class="row g-3">
+                                        <div class="col-12"><label for="nomeAutor" class="form-label">Nome do autor</label><input id="nomeAutor" class="form-control form-book novo-autor" type="text" placeholder="Nome completo"></div>
+                                        <div class="col-md-6"><label for="nascimentoAutor" class="form-label">Data de nascimento</label><input id="nascimentoAutor" class="form-control form-book novo-autor" type="date"></div>
+                                        <div class="col-md-6"><label for="nacionalidadeAutor" class="form-label">Nacionalidade</label><input id="nacionalidadeAutor" class="form-control form-book novo-autor" type="text" placeholder="Ex.: Brasileira"></div>
+                                        <div class="col-12"><label for="biografiaAutor" class="form-label">Biografia <small>(30 a 500 caracteres)</small></label><textarea id="biografiaAutor" class="form-control form-book novo-autor" rows="4" minlength="30" maxlength="500" placeholder="Uma breve biografia do autor."></textarea></div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <article class="form-panel relation-panel">
+                                <div class="panel-heading"><span class="panel-icon"><i class="bi bi-grid-fill"></i></span><div><h2>Categoria</h2><p>Defina onde o livro se encaixa.</p></div></div>
+                                <div class="choice-buttons" role="group" aria-label="Forma de escolher categoria">
+                                    <button class="choice-button active" type="button" data-tipo="categoria" data-modo="existente"><i class="bi bi-collection"></i> Categoria existente</button>
+                                    <button class="choice-button" type="button" data-tipo="categoria" data-modo="novo"><i class="bi bi-plus-square"></i> Criar categoria</button>
+                                </div>
+                                <div id="categoriaExistente" class="relation-content"><label for="categoriaId" class="form-label">Selecione a categoria</label><select id="categoriaId" class="form-select form-book" required><option value="">Carregando categorias...</option></select></div>
+                                <div id="categoriaNovo" class="relation-content d-none">
+                                    <div class="row g-3">
+                                        <div class="col-12"><label for="nomeCategoria" class="form-label">Nome da categoria</label><input id="nomeCategoria" class="form-control form-book nova-categoria" type="text" placeholder="Ex.: Tecnologia"></div>
+                                        <div class="col-12"><label for="descricaoCategoria" class="form-label">Descrição da categoria</label><textarea id="descricaoCategoria" class="form-control form-book nova-categoria" rows="4" placeholder="Descreva o tipo de livros desta categoria."></textarea></div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="livros.html" class="btn btn-outline-book">Cancelar</a>
+                        <button id="btnSalvarLivro" type="submit" class="btn btn-book"><i class="bi bi-cloud-arrow-up-fill"></i> Salvar livro</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer"><div class="container"><hr><div class="text-center"><p>© 2026 BookVerse • Desenvolvido por Caina Henrique.</p></div></div></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/adicionar.js"></script>
+</body>
+</html>
