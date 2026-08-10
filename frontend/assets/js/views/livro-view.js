@@ -16,17 +16,19 @@ export function renderizarLivros(livros) {
 
     lista.innerHTML = livros.map(livro => `
         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-            <article class="book-card h-100">
-                <div class="book-cover position-relative">
+            <article class="book-card h-100 d-flex flex-column">
+                <div class="book-cover position-relative flex-shrink-0">
                     <img src="assets/img/capa.png" alt="Capa de ${escaparHtml(livro.titulo)}" class="book-image">
                     <span class="categoria-badge position-absolute top-0 end-0 m-3 badge bg-warning text-dark">${escaparHtml(livro.categoria || "Geral")}</span>
                 </div>
-                <div class="book-info p-3 d-flex flex-column h-100">
-                    <h5 class="book-title text-white fw-bold mb-1">${escaparHtml(livro.titulo)}</h5>
-                    <p class="book-author text-muted mb-2">${escaparHtml(livro.autor || "Autor não informado")}</p>
-                    <p class="book-description text-secondary small flex-grow-1">${escaparHtml(resumo(livro.descricao))}</p>
-                    <small class="book-isbn d-block text-secondary mb-1">ISBN: ${escaparHtml(livro.isbn || "N/A")}</small>
-                    <small class="d-block text-secondary mb-3">Publicado em: ${formatarData(livro.publicado)}</small>
+                <div class="book-info p-3 d-flex flex-column flex-grow-1">
+                    <h5 class="book-title mb-1">${escaparHtml(livro.titulo)}</h5>
+                    <p class="book-author mb-2">${escaparHtml(livro.autor || "Autor não informado")}</p>
+                    <p class="book-description flex-grow-1">${escaparHtml(resumo(livro.descricao))}</p>
+                    <div class="book-meta">
+                        <small class="book-isbn"><i class="bi bi-upc-scan"></i> ISBN: ${escaparHtml(livro.isbn || "N/A")}</small>
+                        <small class="book-publicado"><i class="bi bi-calendar3"></i> ${formatarData(livro.publicado)}</small>
+                    </div>
                     <div class="book-actions">
                         <a class="book-read-action" data-livro-id="${escaparHtml(livro.id)}" href="ler.html?id=${encodeURIComponent(livro.id)}"><i class="bi bi-book"></i> Ler</a>
                         <button class="book-detail-action" type="button" data-acao="detalhes-livro" data-livro-id="${escaparHtml(livro.id)}" aria-label="Ver detalhes de ${escaparHtml(livro.titulo)}"><i class="bi bi-eye"></i> Detalhes</button>

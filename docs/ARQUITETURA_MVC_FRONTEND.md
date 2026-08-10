@@ -88,6 +88,6 @@ Quando o usuário escolhe criar um autor ou uma categoria durante o cadastro do 
 
 Isso é uma limitação natural de três chamadas HTTP independentes. Para tornar o fluxo atômico no futuro, o backend deve expor uma rota transacional específica, por exemplo `POST /api/livros/completo`, que receba o livro e os relacionamentos novos em uma única operação. A interface atual mostra o erro corretamente e não oculta os registros já criados.
 
-## Scripts antigos
+## Estrutura ativa
 
-Os scripts diretos no diretório `assets/js/` foram preservados como referência histórica, mas não são mais carregados pelas páginas. A execução ativa está em `app.js` e nas pastas MVC.
+Os scripts diretos anteriores foram removidos. A execução do front-end ocorre somente por `app.js` e pelas pastas `core/`, `models/`, `views/` e `controllers/`.
