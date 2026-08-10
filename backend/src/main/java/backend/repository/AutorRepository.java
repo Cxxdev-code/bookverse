@@ -4,8 +4,10 @@ package backend.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import backend.Entity.AutorEntity;
+import backend.repository.projection.ContagemPorId;
 
 public interface AutorRepository extends JpaRepository<AutorEntity, Integer> {
 
@@ -21,4 +23,11 @@ public interface AutorRepository extends JpaRepository<AutorEntity, Integer> {
 
     // Permite buscar autores filtrando pelo nome (case insensitive)
     List<AutorEntity> findByNomeContainingIgnoreCase(String nome);
+
+    @Query("""
+            select a.id as id, count(l.id) as quantidadeLivros
+            from AutorEntity a left join a.livros l
+            group by a.id
+            """)
+    List<ContagemPorId> contarLivrosPorAutor();
 }

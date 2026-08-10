@@ -1,68 +1,94 @@
 import { LivroModel } from "../models/livro-model.js";
-import { AutorModel } from "../models/autor-model.js";
 import { CategoriaModel } from "../models/categoria-model.js";
 import { definirTexto, escaparHtml, porId } from "../core/dom.js";
-import { renderizarDetalhesLivro, renderizarFiltrosCategorias, renderizarLivros } from "../views/livro-view.js?v=leitura-1";
+import { renderizarDetalhesLivro, renderizarFiltrosCategorias, renderizarLivros, renderizarPaginacao } from "../views/livro-view.js?v=catalogo-api-1";
 
-const estado = { livros: [], autores: [], categorias: [], categoria: "todas" };
+const estado = { categorias: [], pagina: 0, tamanho: 12, busca: "", categoriaId: null, ordem: "recentes" };
+let temporizadorPesquisa;
 
-function ordenar(livros) {
-    const ordem = porId("ordenacao")?.value || "";
-    const resultado = [...livros];
-    if (ordem.includes("A-Z")) resultado.sort((a, b) => a.titulo.localeCompare(b.titulo));
-    if (ordem.includes("Z-A")) resultado.sort((a, b) => b.titulo.localeCompare(a.titulo));
-    if (ordem.includes("Autor")) resultado.sort((a, b) => (a.autor || "").localeCompare(b.autor || ""));
-    if (ordem.includes("recentes")) resultado.sort((a, b) => new Date(b.publicado) - new Date(a.publicado));
-    if (ordem.includes("antigos")) resultado.sort((a, b) => new Date(a.publicado) - new Date(b.publicado));
-    return resultado;
+function sincronizarURL() {
+    const parametros = new URLSearchParams();
+    if (estado.busca) parametros.set("busca", estado.busca);
+    const categoria = estado.categorias.find(item => Number(item.id) === Number(estado.categoriaId));
+    if (categoria?.nome) parametros.set("categoria", categoria.nome);
+    const sufixo = parametros.toString();
+    window.history.replaceState({}, "", `livros.html${sufixo ? `?${sufixo}` : ""}`);
 }
 
-function aplicarFiltros() {
-    const termo = porId("pesquisaLivro")?.value.toLocaleLowerCase("pt-BR").trim() || "";
-    const filtrados = estado.livros.filter(livro => {
-        const categoriaCorreta = estado.categoria === "todas" || livro.categoria?.toLocaleLowerCase("pt-BR") === estado.categoria.toLocaleLowerCase("pt-BR");
-        const texto = [livro.titulo, livro.autor, livro.isbn, livro.descricao, livro.categoria].filter(Boolean).join(" ").toLocaleLowerCase("pt-BR");
-        return categoriaCorreta && texto.includes(termo);
-    });
-    renderizarLivros(ordenar(filtrados));
-    definirTexto("quantidadeLivrosLista", filtrados.length);
+async function carregarCatalogo({ reiniciarPagina = false } = {}) {
+    if (reiniciarPagina) estado.pagina = 0;
+    const lista = porId("listaLivros");
+    lista?.setAttribute("aria-busy", "true");
+    try {
+        const resposta = await LivroModel.listarCatalogo({
+            page: estado.pagina,
+            size: estado.tamanho,
+            busca: estado.busca,
+            categoriaId: estado.categoriaId,
+            ordem: estado.ordem
+        });
+        estado.pagina = resposta.page;
+        renderizarLivros(resposta.content || []);
+        renderizarPaginacao(resposta);
+        definirTexto("quantidadeLivrosLista", resposta.totalElements ?? 0);
+        sincronizarURL();
+    } catch (erro) {
+        console.error(erro);
+        if (lista) lista.innerHTML = `<div class="col-12 text-center py-5"><h4 class="text-danger">${escaparHtml(erro.message)}</h4></div>`;
+        renderizarPaginacao(null);
+    } finally {
+        lista?.removeAttribute("aria-busy");
+    }
+}
+
+function agendarPesquisa() {
+    window.clearTimeout(temporizadorPesquisa);
+    temporizadorPesquisa = window.setTimeout(() => carregarCatalogo({ reiniciarPagina: true }), 300);
 }
 
 function configurarEventos() {
-    porId("pesquisaLivro")?.addEventListener("input", aplicarFiltros);
-    porId("btnPesquisar")?.addEventListener("click", aplicarFiltros);
-    porId("ordenacao")?.addEventListener("change", aplicarFiltros);
+    porId("pesquisaLivro")?.addEventListener("input", evento => {
+        estado.busca = evento.target.value.trim();
+        agendarPesquisa();
+    });
+    porId("btnPesquisar")?.addEventListener("click", () => {
+        estado.busca = porId("pesquisaLivro")?.value.trim() || "";
+        carregarCatalogo({ reiniciarPagina: true });
+    });
+    porId("ordenacao")?.addEventListener("change", evento => {
+        estado.ordem = evento.target.value;
+        carregarCatalogo({ reiniciarPagina: true });
+    });
     document.querySelector(".navbar .search-box")?.addEventListener("submit", evento => {
         evento.preventDefault();
         const campoNavbar = evento.currentTarget.querySelector("input");
         const pesquisa = porId("pesquisaLivro");
         if (!campoNavbar || !pesquisa) return;
         pesquisa.value = campoNavbar.value;
-        aplicarFiltros();
-    });
-    document.querySelector(".navbar .search-box input")?.addEventListener("input", evento => {
-        const pesquisa = porId("pesquisaLivro");
-        if (!pesquisa) return;
-        pesquisa.value = evento.target.value;
-        aplicarFiltros();
+        estado.busca = campoNavbar.value.trim();
+        carregarCatalogo({ reiniciarPagina: true });
     });
     porId("listaCategorias")?.addEventListener("click", evento => {
-        const botao = evento.target.closest("[data-categoria]");
+        const botao = evento.target.closest("[data-categoria-id]");
         if (!botao) return;
-        estado.categoria = botao.dataset.categoria;
-        renderizarFiltrosCategorias(estado.categorias, estado.categoria);
-        aplicarFiltros();
+        estado.categoriaId = botao.dataset.categoriaId ? Number(botao.dataset.categoriaId) : null;
+        renderizarFiltrosCategorias(estado.categorias, estado.categoriaId);
+        carregarCatalogo({ reiniciarPagina: true });
+    });
+    porId("paginacaoLivros")?.addEventListener("click", evento => {
+        const botao = evento.target.closest("[data-pagina]");
+        if (!botao || botao.disabled) return;
+        estado.pagina = Number(botao.dataset.pagina);
+        carregarCatalogo();
+        porId("tituloCatalogo")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     porId("listaLivros")?.addEventListener("click", async evento => {
         const botao = evento.target.closest("[data-acao='detalhes-livro']");
         if (!botao) return;
         try {
-            const livro = await LivroModel.buscarPorId(botao.dataset.livroId);
-            renderizarDetalhesLivro(livro);
+            renderizarDetalhesLivro(await LivroModel.buscarPorId(botao.dataset.livroId));
         } catch (erro) {
             console.error(erro);
-            const livro = estado.livros.find(item => String(item.id) === botao.dataset.livroId);
-            if (livro) renderizarDetalhesLivro(livro);
         }
     });
 }
@@ -70,22 +96,22 @@ function configurarEventos() {
 async function iniciar() {
     const lista = porId("listaLivros");
     try {
-        [estado.livros, estado.autores, estado.categorias] = await Promise.all([
-            LivroModel.listar(), AutorModel.listar(), CategoriaModel.listar()
-        ]);
+        const [categorias, home] = await Promise.all([CategoriaModel.listar(), LivroModel.carregarHome()]);
+        estado.categorias = categorias;
         const parametros = new URLSearchParams(window.location.search);
-        const busca = parametros.get("busca");
-        const categoria = parametros.get("categoria");
-        if (busca) porId("pesquisaLivro").value = busca;
-        if (categoria && estado.categorias.some(item => item.nome === categoria)) estado.categoria = categoria;
-        definirTexto("quantidadeLivros", estado.livros.length);
-        definirTexto("quantidadeAutores", estado.autores.length);
-        definirTexto("quantidadeCategorias", estado.categorias.length);
-        renderizarFiltrosCategorias(estado.categorias, estado.categoria);
-        aplicarFiltros();
+        estado.busca = parametros.get("busca")?.trim() || "";
+        const categoriaInicial = categorias.find(item => item.nome === parametros.get("categoria"));
+        estado.categoriaId = categoriaInicial?.id ?? null;
+        if (porId("pesquisaLivro")) porId("pesquisaLivro").value = estado.busca;
+
+        definirTexto("quantidadeLivros", home.totais?.livros ?? 0);
+        definirTexto("quantidadeAutores", home.totais?.autores ?? 0);
+        definirTexto("quantidadeCategorias", home.totais?.categorias ?? categorias.length);
+        renderizarFiltrosCategorias(categorias, estado.categoriaId);
+        await carregarCatalogo();
     } catch (erro) {
         console.error(erro);
-        lista.innerHTML = `<div class="col-12 text-center py-5"><h4 class="text-danger">${escaparHtml(erro.message)}</h4></div>`;
+        if (lista) lista.innerHTML = `<div class="col-12 text-center py-5"><h4 class="text-danger">${escaparHtml(erro.message)}</h4></div>`;
     }
 }
 

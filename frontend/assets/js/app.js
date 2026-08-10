@@ -1,5 +1,5 @@
-import { iniciarHome } from "./controllers/home-controller.js?v=leitura-1";
-import { iniciarLivros } from "./controllers/livros-controller.js?v=leitura-1";
+import { iniciarHome } from "./controllers/home-controller.js?v=catalogo-api-1";
+import { iniciarLivros } from "./controllers/livros-controller.js?v=catalogo-api-1";
 import { iniciarAutores } from "./controllers/autores-controller.js";
 import { iniciarCategorias } from "./controllers/categorias-controller.js";
 import { iniciarAdicionar } from "./controllers/adicionar-controller.js";

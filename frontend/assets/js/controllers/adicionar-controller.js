@@ -10,6 +10,11 @@ function valor(id) {
     return porId(id)?.value.trim() || "";
 }
 
+function numeroOpcional(id) {
+    const valorNumerico = Number(valor(id));
+    return Number.isInteger(valorNumerico) && valorNumerico > 0 ? valorNumerico : null;
+}
+
 function livroPreenchido() {
     return ["titulo", "isbn", "publicado", "descricao"].every(id => valor(id));
 }
@@ -74,7 +79,20 @@ async function salvar(evento) {
         const autorId = await resolverAutor();
         const categoriaId = await resolverCategoria();
         await LivroModel.criar({
-            titulo: valor("titulo"), isbn: valor("isbn"), publicado: valor("publicado"), descricao: valor("descricao"), autorId, categoriaId
+            titulo: valor("titulo"),
+            isbn: valor("isbn"),
+            publicado: valor("publicado"),
+            descricao: valor("descricao"),
+            autorId,
+            categoriaId,
+            capaUrl: valor("capaUrl") || null,
+            numeroPaginas: numeroOpcional("numeroPaginas"),
+            idioma: valor("idioma") || null,
+            editora: valor("editora") || null,
+            edicao: valor("edicao") || null,
+            classificacaoEtaria: valor("classificacaoEtaria") || null,
+            status: valor("statusLivro") || "PUBLICADO",
+            destaque: Boolean(porId("destaque")?.checked)
         });
         await carregarRelacionamentos();
         formulario.reset();

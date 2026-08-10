@@ -88,6 +88,14 @@ Quando o usuário escolhe criar um autor ou uma categoria durante o cadastro do 
 
 Isso é uma limitação natural de três chamadas HTTP independentes. Para tornar o fluxo atômico no futuro, o backend deve expor uma rota transacional específica, por exemplo `POST /api/livros/completo`, que receba o livro e os relacionamentos novos em uma única operação. A interface atual mostra o erro corretamente e não oculta os registros já criados.
 
+## Home e Biblioteca
+
+A Home agora usa uma visão própria, `home-view.js`, para renderizar as métricas do acervo, os atalhos de categorias e as tags de busca. O `home-controller.js` carrega livros, autores e categorias em paralelo e entrega esses dados para a visão; ele continua responsável apenas pelos eventos de busca e de detalhes.
+
+Os cards de livro permanecem centralizados em `livro-view.js`. A função `renderizarLivros` recebe a opção de layout `home` ou `library`, permitindo que a mesma informação tenha uma apresentação adequada em cada tela sem duplicar HTML ou regras de navegação. Os links **Ler** seguem apontando para `ler.html?id={id}`.
+
+Nenhuma rota ou DTO do backend foi alterado para essa evolução visual.
+
 ## Estrutura ativa
 
 Os scripts diretos anteriores foram removidos. A execução do front-end ocorre somente por `app.js` e pelas pastas `core/`, `models/`, `views/` e `controllers/`.

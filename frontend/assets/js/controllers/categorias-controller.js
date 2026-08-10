@@ -8,16 +8,16 @@ async function iniciar() {
     const vazio = porId("nenhumaCategoria");
     const lista = porId("listaCategorias");
     try {
-        const [categorias, livros] = await Promise.all([CategoriaModel.listar(), LivroModel.listar()]);
+        const [categorias, home] = await Promise.all([CategoriaModel.listar(), LivroModel.carregarHome()]);
         definirTexto("quantidadeCategorias", categorias.length);
         definirTexto("quantidadeCategoriasLista", categorias.length);
-        definirTexto("quantidadeLivros", livros.length);
+        definirTexto("quantidadeLivros", home.totais?.livros ?? 0);
         carregando?.classList.add("d-none");
         if (categorias.length === 0) {
             vazio?.classList.remove("d-none");
             return;
         }
-        renderizarCategorias(categorias, livros);
+        renderizarCategorias(categorias);
     } catch (erro) {
         console.error(erro);
         carregando?.classList.add("d-none");

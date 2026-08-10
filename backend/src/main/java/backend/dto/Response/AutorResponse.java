@@ -14,4 +14,5 @@ public class AutorResponse {
     private String biografia;
     private LocalDate dataNascimento;
     private String nacionalidade;
+    private Long quantidadeLivros;
 }

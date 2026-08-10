@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import backend.Entity.LivroEntity;
+import backend.dto.Response.LivroCardResponse;
+import backend.dto.Response.LivroDetalheResponse;
 import backend.dto.Response.LivroResponse;
 
 @Component
@@ -25,6 +27,57 @@ public class LivroMapper {
                 .categoriaId(livro.getCategoria() != null ? livro.getCategoria().getId() : null)
                 .categoria(livro.getCategoria() != null ? livro.getCategoria().getNome() : "Sem Categoria")
                 .publicado(livro.getDataPublicacao())
+                .capaUrl(livro.getCapaUrl())
+                .numeroPaginas(livro.getNumeroPaginas())
+                .idioma(livro.getIdioma())
+                .editora(livro.getEditora())
+                .edicao(livro.getEdicao())
+                .classificacaoEtaria(livro.getClassificacaoEtaria())
+                .status(livro.getStatus())
+                .destaque(livro.getDestaque())
+                .criadoEm(livro.getCriadoEm())
+                .atualizadoEm(livro.getAtualizadoEm())
+                .build();
+    }
+
+    public LivroCardResponse converterParaCardResponse(LivroEntity livro) {
+        return LivroCardResponse.builder()
+                .id(livro.getId())
+                .titulo(livro.getTitulo())
+                .autorId(livro.getAutor() != null ? livro.getAutor().getId() : null)
+                .autor(livro.getAutor() != null ? livro.getAutor().getNome() : "Autor desconhecido")
+                .categoriaId(livro.getCategoria() != null ? livro.getCategoria().getId() : null)
+                .categoria(livro.getCategoria() != null ? livro.getCategoria().getNome() : "Sem categoria")
+                .capaUrl(livro.getCapaUrl())
+                .descricaoResumo(resumir(livro.getDescricao()))
+                .publicado(livro.getDataPublicacao())
+                .numeroPaginas(livro.getNumeroPaginas())
+                .status(livro.getStatus())
+                .destaque(livro.getDestaque())
+                .build();
+    }
+
+    public LivroDetalheResponse converterParaDetalheResponse(LivroEntity livro) {
+        return LivroDetalheResponse.builder()
+                .id(livro.getId())
+                .titulo(livro.getTitulo())
+                .descricao(livro.getDescricao())
+                .isbn(livro.getIsbn())
+                .autorId(livro.getAutor() != null ? livro.getAutor().getId() : null)
+                .autor(livro.getAutor() != null ? livro.getAutor().getNome() : "Autor desconhecido")
+                .categoriaId(livro.getCategoria() != null ? livro.getCategoria().getId() : null)
+                .categoria(livro.getCategoria() != null ? livro.getCategoria().getNome() : "Sem categoria")
+                .publicado(livro.getDataPublicacao())
+                .capaUrl(livro.getCapaUrl())
+                .numeroPaginas(livro.getNumeroPaginas())
+                .idioma(livro.getIdioma())
+                .editora(livro.getEditora())
+                .edicao(livro.getEdicao())
+                .classificacaoEtaria(livro.getClassificacaoEtaria())
+                .status(livro.getStatus())
+                .destaque(livro.getDestaque())
+                .criadoEm(livro.getCriadoEm())
+                .atualizadoEm(livro.getAtualizadoEm())
                 .build();
     }
 
@@ -32,5 +85,12 @@ public class LivroMapper {
         return livros.stream()
                 .map(this::converterParaResponse)
                 .toList();
+    }
+
+    private String resumir(String descricao) {
+        if (descricao == null || descricao.isBlank()) return "";
+        String texto = descricao.trim();
+        int limite = 180;
+        return texto.length() <= limite ? texto : texto.substring(0, limite).trim() + "...";
     }
 }

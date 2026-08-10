@@ -1,6 +1,4 @@
 import { LivroModel } from "../models/livro-model.js";
-import { AutorModel } from "../models/autor-model.js";
-import { CategoriaModel } from "../models/categoria-model.js";
 import { UsuarioModel } from "../models/usuario-model.js";
 import { obterMatriculaAtiva } from "../core/session.js";
 import { escaparHtml, porId } from "../core/dom.js";
@@ -10,9 +8,7 @@ async function iniciar() {
     const carregando = porId("carregandoPerfil");
     const vazio = porId("perfilVazio");
     try {
-        const [usuarios, livros, autores, categorias] = await Promise.all([
-            UsuarioModel.listar(), LivroModel.listar(), AutorModel.listar(), CategoriaModel.listar()
-        ]);
+        const [usuarios, home] = await Promise.all([UsuarioModel.listar(), LivroModel.carregarHome()]);
         carregando?.classList.add("d-none");
         if (usuarios.length === 0) {
             vazio?.classList.remove("d-none");
@@ -20,7 +16,7 @@ async function iniciar() {
         }
         const matricula = obterMatriculaAtiva();
         const usuario = usuarios.find(item => String(item.matricula) === matricula) || usuarios[0];
-        renderizarPerfil(usuario, { livros: livros.length, autores: autores.length, categorias: categorias.length });
+        renderizarPerfil(usuario, home.totais || { livros: 0, autores: 0, categorias: 0 });
     } catch (erro) {
         console.error(erro);
         carregando?.classList.add("d-none");

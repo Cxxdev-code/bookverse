@@ -59,7 +59,8 @@ public class globalerror {
     @ExceptionHandler({
             ConstraintViolationException.class,
             HttpMessageNotReadableException.class,
-            MethodArgumentTypeMismatchException.class
+            MethodArgumentTypeMismatchException.class,
+            RequisicaoInvalidaException.class
     })
     public ResponseEntity<Map<String, Object>> handleRequisicaoInvalida(Exception ex) {
         return buildResponse(HttpStatus.BAD_REQUEST, "Dados da solicitação são inválidos.");

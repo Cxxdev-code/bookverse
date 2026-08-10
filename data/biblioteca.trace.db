@@ -1,3 +1,0 @@
-2026-08-09 16:06:33.530963-03:00 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRICAO CHARACTER VARYING(255)": "U&'O que acontece nos bastidores quando um usu\\00e1rio clica em um bot\\00e3o na ... (331)"; SQL statement:
-insert into livros (autor_id,categoria_id,data_publicacao,descricao,isbn,titulo,id) values (?,?,?,?,?,?,default) [22001-240]

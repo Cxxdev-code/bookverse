@@ -10,10 +10,15 @@ import backend.dto.Response.CategoriaResponse;
 public class CategoriaMapper {
 
     public CategoriaResponse converterParaResponse(CategoriaEntity categoria) {
+        return converterParaResponse(categoria, 0L);
+    }
+
+    public CategoriaResponse converterParaResponse(CategoriaEntity categoria, Long quantidadeLivros) {
         return CategoriaResponse.builder()
                 .id(categoria.getId())
                 .nome(categoria.getNome())
                 .descricao(categoria.getDescricao())
+                .quantidadeLivros(quantidadeLivros)
                 .build();
     }
 

@@ -1,7 +1,9 @@
 package backend.dto.Response;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import backend.Entity.StatusLivro;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,4 +25,14 @@ public class LivroResponse {
     private Integer categoriaId;
     private String categoria;  
     private LocalDate publicado;
+    private String capaUrl;
+    private Integer numeroPaginas;
+    private String idioma;
+    private String editora;
+    private String edicao;
+    private String classificacaoEtaria;
+    private StatusLivro status;
+    private Boolean destaque;
+    private LocalDateTime criadoEm;
+    private LocalDateTime atualizadoEm;
 }

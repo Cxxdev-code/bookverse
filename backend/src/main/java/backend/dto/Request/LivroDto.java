@@ -2,6 +2,7 @@ package backend.dto.Request;
 
 import java.time.LocalDate;
 
+import backend.Entity.StatusLivro;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,4 +39,26 @@ public class LivroDto {
 
     @NotNull(message = "O ID da categoria é obrigatório")
     private Integer categoriaId;
+
+    @Size(max = 2048, message = "A URL da capa deve ter no mÃ¡ximo 2048 caracteres")
+    private String capaUrl;
+
+    @jakarta.validation.constraints.Positive(message = "O nÃºmero de pÃ¡ginas deve ser maior que zero")
+    private Integer numeroPaginas;
+
+    @Size(max = 100, message = "O idioma deve ter no mÃ¡ximo 100 caracteres")
+    private String idioma;
+
+    @Size(max = 255, message = "A editora deve ter no mÃ¡ximo 255 caracteres")
+    private String editora;
+
+    @Size(max = 100, message = "A ediÃ§Ã£o deve ter no mÃ¡ximo 100 caracteres")
+    private String edicao;
+
+    @Size(max = 20, message = "A classificaÃ§Ã£o etÃ¡ria deve ter no mÃ¡ximo 20 caracteres")
+    private String classificacaoEtaria;
+
+    private StatusLivro status;
+
+    private Boolean destaque;
 }

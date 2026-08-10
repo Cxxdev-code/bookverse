@@ -12,6 +12,10 @@ import backend.dto.Response.AutorResponse;
 public class AutorMapper {
 
     public AutorResponse converterParaResponse(AutorEntity autor) {
+        return converterParaResponse(autor, 0L);
+    }
+
+    public AutorResponse converterParaResponse(AutorEntity autor, Long quantidadeLivros) {
 
         return AutorResponse.builder()
                 .id(autor.getId())
@@ -19,6 +23,7 @@ public class AutorMapper {
                 .biografia(autor.getBiografia())
                 .dataNascimento(autor.getDataNascimento())
                 .nacionalidade(autor.getNacionalidade())
+                .quantidadeLivros(quantidadeLivros)
                 .build();
     }
 
