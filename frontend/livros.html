@@ -54,7 +54,7 @@
 
 </head>
 
-<body>
+<body data-pagina="livros">
 
    <!-- ==========================================
                 NAVBAR
@@ -159,6 +159,8 @@
                         autocomplete="off">
 
                 </form>
+
+                <a href="login.html" class="nav-login-btn"><i class="bi bi-box-arrow-in-right"></i> Login</a>
 
                 <!-- Perfil -->
 
@@ -498,10 +500,7 @@
                 id="listaLivros"
                 class="row g-4">
 
-                <!--
-                    Os cards serão inseridos
-                    automaticamente pelo livros.js
-                -->
+                <!-- Os cards são inseridos pelo controlador MVC. -->
 
             </div>
 
@@ -779,11 +778,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="assets/js/main.js"></script>
-
-    <script src="assets/js/api.js"></script>
-
-    <script src="assets/js/livros.js"></script>
+    <script type="module" src="assets/js/app.js?v=leitura-1"></script>
 
     </body>
 

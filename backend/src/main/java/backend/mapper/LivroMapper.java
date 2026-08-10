@@ -19,8 +19,10 @@ public class LivroMapper {
                 .isbn(livro.getIsbn())
                 .titulo(livro.getTitulo())
                 .descricao(livro.getDescricao())
+                .autorId(livro.getAutor() != null ? livro.getAutor().getId() : null)
                 // Acessamos o objeto relacional e pegamos a string amigável
                 .autor(livro.getAutor() != null ? livro.getAutor().getNome() : "Autor Desconhecido")
+                .categoriaId(livro.getCategoria() != null ? livro.getCategoria().getId() : null)
                 .categoria(livro.getCategoria() != null ? livro.getCategoria().getNome() : "Sem Categoria")
                 .publicado(livro.getDataPublicacao())
                 .build();

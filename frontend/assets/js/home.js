@@ -9,7 +9,7 @@ function criarCardLivro(livro) {
         <div class="book-card h-100">
 
             <img
-                src="assets/img/capa2.jpg"
+                src="assets/img/capa3.jpg"
                 alt="${livro.titulo}">
 
             <div class="book-info">
@@ -39,12 +39,14 @@ function criarCardLivro(livro) {
 
                 </small>
 
-                <button
-                    class="btn btn-book mt-3 w-100">
+                <a
+                    class="btn btn-book mt-3 w-100"
+                    data-livro-id="${livro.id}"
+                    href="ler.html?id=${encodeURIComponent(livro.id)}">
 
                     📖 Ler Livro
 
-                </button>
+                </a>
 
             </div>
 

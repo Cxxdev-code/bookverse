@@ -18,28 +18,55 @@
     <link rel="stylesheet" href="assets/css/perfil.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-bookverse">
+<body data-pagina="perfil">
+   <nav class="navbar navbar-expand-lg fixed-top navbar-bookverse">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><i class="bi bi-book-half"></i>BookVerse</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-book-half"></i>
+                BookVerse
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
-                    <li class="nav-item"><a class="nav-link" href="livros.html">Biblioteca</a></li>
-                    <li class="nav-item"><a class="nav-link" href="autores.html">Autores</a></li>
-                    <li class="nav-item"><a class="nav-link" href="categorias.html">Categorias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livros.html">Biblioteca</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="autores.html">Autores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categorias.html">Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="adicionar.html">Adicionar</a>
+                    </li>
                 </ul>
-                <form class="d-flex search-box" role="search" onsubmit="return false;">
-                    <input class="form-control" type="search" placeholder="Pesquisar livros..." aria-label="Pesquisar livros" autocomplete="off">
+
+                <form class="d-flex search-box">
+                    <input class="form-control"
+                           type="search"
+                           placeholder="Pesquisar livros...">
                 </form>
-                <a href="perfil.html" class="perfil-btn active" aria-label="Abrir perfil"><i class="bi bi-person-circle"></i></a>
+
+                <a href="login.html" class="nav-login-btn"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+
+                <a href="perfil.html" class="perfil-btn active">
+                    <i class="bi bi-person-circle"></i>
+                </a>
             </div>
         </div>
     </nav>
+
 
     <main class="profile-page">
         <section class="profile-hero">
@@ -74,6 +101,7 @@
                                     <div class="detail-item"><i class="bi bi-gender-ambiguous"></i><div><span>Sexo</span><strong id="sexoUsuario">Não informado</strong></div></div>
                                     <div class="detail-item"><i class="bi bi-calendar-event"></i><div><span>Data de nascimento</span><strong id="nascimentoUsuario">Não informado</strong></div></div>
                                     <div class="detail-item"><i class="bi bi-person-check"></i><div><span>Idade</span><strong id="idadeUsuario">Não informada</strong></div></div>
+                                    <div class="detail-item"><i class="bi bi-fingerprint"></i><div><span>Código do usuário</span><strong id="idUsuario">Não informado</strong></div></div>
                                 </div>
                             </article>
                         </div>
@@ -106,8 +134,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/api.js"></script>
-    <script src="assets/js/usuario.js"></script>
+    <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

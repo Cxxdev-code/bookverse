@@ -31,8 +31,10 @@ async function carregarPerfil() {
             return;
         }
 
-        // Enquanto não há autenticação, o primeiro usuário cadastrado é exibido.
-        const usuario = usuarios[0];
+        // Enquanto não há tokens, a matrícula salva durante o login identifica
+        // o perfil atual. Sem login, mantém o primeiro usuário cadastrado.
+        const matriculaAtiva = sessionStorage.getItem("bookverseUsuarioMatricula");
+        const usuario = usuarios.find(item => String(item.matricula) === matriculaAtiva) || usuarios[0];
         atualizarPerfil("nomeUsuario", usuario.nome || "Leitor BookVerse");
         atualizarPerfil("matriculaUsuario", usuario.matricula || "—");
         atualizarPerfil("sexoUsuario", usuario.sexo || "Não informado");

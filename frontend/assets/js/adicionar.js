@@ -38,6 +38,7 @@ function configurarModo(tipo, modo) {
     select.required = !usarNovo;
     select.disabled = usarNovo;
     definirObrigatoriedade(eAutor ? ".novo-autor" : ".nova-categoria", usarNovo);
+    atualizarEtapas();
 }
 
 function preencherSelect(id, itens, textoPadrao) {
@@ -45,6 +46,56 @@ function preencherSelect(id, itens, textoPadrao) {
     select.innerHTML = `<option value="">${textoPadrao}</option>` + itens
         .map(item => `<option value="${item.id}">${item.nome}</option>`)
         .join("");
+}
+
+function campoPreenchido(id) {
+    return porId(id).value.trim().length > 0;
+}
+
+function livroPreenchido() {
+    return campoPreenchido("titulo") &&
+        campoPreenchido("isbn") &&
+        campoPreenchido("publicado") &&
+        campoPreenchido("descricao");
+}
+
+function autorPreenchido() {
+    if (modoAutor === "existente") return campoPreenchido("autorId");
+
+    return campoPreenchido("nomeAutor") &&
+        campoPreenchido("nascimentoAutor") &&
+        campoPreenchido("nacionalidadeAutor") &&
+        porId("biografiaAutor").value.trim().length >= 30;
+}
+
+function categoriaPreenchida() {
+    if (modoCategoria === "existente") return campoPreenchido("categoriaId");
+
+    return campoPreenchido("nomeCategoria") && campoPreenchido("descricaoCategoria");
+}
+
+function atualizarEtapas() {
+    const livroPronto = livroPreenchido();
+    const autorPronto = autorPreenchido();
+    const categoriaPronta = categoriaPreenchida();
+    const etapas = {
+        livro: porId("formAdicionarLivro")?.querySelector('[data-etapa="livro"]'),
+        autor: porId("formAdicionarLivro")?.querySelector('[data-etapa="autor"]'),
+        categoria: porId("formAdicionarLivro")?.querySelector('[data-etapa="categoria"]')
+    };
+
+    if (!etapas.livro) return;
+
+    etapas.livro.classList.toggle("active", !livroPronto);
+    etapas.livro.classList.toggle("completed", livroPronto);
+    etapas.autor.classList.toggle("active", livroPronto && !autorPronto);
+    etapas.autor.classList.toggle("completed", livroPronto && autorPronto);
+    etapas.categoria.classList.toggle("active", livroPronto && autorPronto && !categoriaPronta);
+    etapas.categoria.classList.toggle("completed", livroPronto && autorPronto && categoriaPronta);
+    porId("formAdicionarLivro").querySelector('[data-linha="autor"]')
+        .classList.toggle("completed", livroPronto);
+    porId("formAdicionarLivro").querySelector('[data-linha="categoria"]')
+        .classList.toggle("completed", livroPronto && autorPronto);
 }
 
 async function requisitar(url, corpo) {
@@ -91,6 +142,7 @@ async function atualizarRelacoes() {
     const [autores, categorias] = await Promise.all([buscarAutores(), buscarCategorias()]);
     preencherSelect("autorId", autores, "Selecione um autor");
     preencherSelect("categoriaId", categorias, "Selecione uma categoria");
+    atualizarEtapas();
 }
 
 function restaurarFormulario() {
@@ -154,7 +206,12 @@ async function iniciarPagina() {
     document.querySelectorAll(".choice-button").forEach(botao => {
         botao.addEventListener("click", () => configurarModo(botao.dataset.tipo, botao.dataset.modo));
     });
+    document.querySelectorAll(".form-book").forEach(campo => {
+        campo.addEventListener("input", atualizarEtapas);
+        campo.addEventListener("change", atualizarEtapas);
+    });
     porId("formAdicionarLivro").addEventListener("submit", salvarLivro);
+    atualizarEtapas();
 }
 
 document.addEventListener("DOMContentLoaded", iniciarPagina);

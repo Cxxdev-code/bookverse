@@ -12,6 +12,10 @@ public interface AutorRepository extends JpaRepository<AutorEntity, Integer> {
     // Verifica se já existe um autor cadastrado com o mesmo nome
     boolean existsByNome(String nome);
 
+    boolean existsByNomeIgnoreCase(String nome);
+
+    boolean existsByNomeIgnoreCaseAndIdNot(String nome, Integer id);
+
     
     
 

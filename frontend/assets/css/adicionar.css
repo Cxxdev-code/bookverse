@@ -25,6 +25,9 @@
 .progress-step.active { color: var(--gold); }
 .progress-step.active span { color: #15191e; background: var(--gold); border-color: var(--gold); }
 .progress-line { width: 110px; height: 1px; margin: 0 14px 23px; background: var(--border); }
+.progress-step.completed { color: var(--gold); }
+.progress-step.completed span { color: var(--gold); background: rgba(212, 175, 55, .12); border-color: var(--gold); }
+.progress-line.completed { background: var(--gold); }
 
 .form-message {
     display: flex;

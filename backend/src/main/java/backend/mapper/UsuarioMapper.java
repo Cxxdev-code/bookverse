@@ -25,6 +25,7 @@ public class UsuarioMapper {
 
     public UsuarioResponse converterParaResponse(UsuarioEntity usuario) {
         return UsuarioResponse.builder()
+                .id(usuario.getId())
                 .nome(usuario.getNome())
                 .sexo(usuario.getSexo())
                 .idade(usuario.getIdade())

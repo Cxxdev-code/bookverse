@@ -102,6 +102,81 @@
 
 }
 
+.book-actions {
+
+    display:grid;
+
+    grid-template-columns:minmax(0, 1fr) auto;
+
+    gap:10px;
+
+    margin-top:8px;
+
+}
+
+.book-read-action,
+.book-detail-action {
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    min-height:42px;
+
+    border-radius:10px;
+
+    font-size:.88rem;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:var(--transition);
+
+}
+
+.book-read-action {
+
+    border:1px solid var(--gold);
+
+    background:var(--gold);
+
+    color:#111827;
+
+}
+
+.book-read-action:hover {
+
+    background:var(--gold-light);
+
+    color:#111827;
+
+}
+
+.book-detail-action {
+
+    padding:0 13px;
+
+    border:1px solid var(--border);
+
+    background:transparent;
+
+    color:var(--text);
+
+}
+
+.book-detail-action:hover {
+
+    border-color:var(--gold);
+
+    color:var(--gold);
+
+}
+
 .featured-books{
 
     padding:100px 0;

@@ -9,6 +9,7 @@ import backend.Entity.CategoriaEntity;
 import backend.Entity.LivroEntity;
 import backend.dto.Request.LivroDto;
 import backend.dto.Response.LivroResponse;
+import backend.exception.autor.AutorIdNaoEncontrado;
 import backend.exception.categoria.CategoriaNaoEncontradaException;
 import backend.exception.livro.LivroJaExistenteException;
 import backend.exception.livro.LivroNaoEncontradoPorIdExcption;
@@ -36,13 +37,17 @@ public class BibliotecaService {
 
     public LivroResponse adicionarLivro(LivroDto livroDto) {
         String titulo = livroDto.getTitulo();
-        if (livroRepository.existsByTitulo(titulo)) {
-            throw new LivroJaExistenteException("Livro Já cadastrado com Titulo: " + titulo);   
+        if (livroRepository.existsByTituloIgnoreCase(titulo)) {
+            throw new LivroJaExistenteException("Já existe um livro cadastrado com o título: " + titulo);
+        }
+
+        if (livroRepository.existsByIsbn(livroDto.getIsbn())) {
+            throw new LivroJaExistenteException("Já existe um livro cadastrado com o ISBN: " + livroDto.getIsbn());
         }
 
         // 1. Buscar Autor e Categoria pelos IDs fornecidos
         AutorEntity autor = autorRepository.findById(livroDto.getAutorId())
-            .orElseThrow(() -> new RuntimeException( "Autor não encontrado com ID: " + livroDto.getAutorId())); // Troque por AutorNaoEncontradoException
+            .orElseThrow(() -> new AutorIdNaoEncontrado("Autor não encontrado com ID: " + livroDto.getAutorId()));
             
         CategoriaEntity categoria = categoriaRepository.findById(livroDto.getCategoriaId())
             .orElseThrow(() -> new CategoriaNaoEncontradaException(livroDto.getCategoriaId()));
@@ -57,14 +62,9 @@ public class BibliotecaService {
             .categoria(categoria) // Atribui a entidade Categoria completa
             .build();
 
-        livroRepository.save(livroAdicionado);
-            
-        LivroResponse response = livroMapper.converterParaResponse(livroAdicionado);
-        response.setAutor(autor.getNome());
-        response.setTitulo(livroDto.getTitulo());
+        LivroEntity livroSalvo = livroRepository.save(livroAdicionado);
 
-
-        return response;
+        return livroMapper.converterParaResponse(livroSalvo);
     }  
 
     public LivroResponse buscarLivroPorId(Integer id) {
@@ -84,9 +84,19 @@ public class BibliotecaService {
     public LivroResponse editarLivro(Integer id, LivroDto livroDto) {
         LivroEntity entidadeLivroRecebida = livroRepository.findById(id)
             .orElseThrow(() -> new LivroNaoEncontradoPorIdExcption(id));
+
+        if (livroRepository.existsByTituloIgnoreCaseAndIdNot(livroDto.getTitulo(), id)) {
+            throw new LivroJaExistenteException(
+                    "Já existe um livro cadastrado com o título: " + livroDto.getTitulo());
+        }
+
+        if (livroRepository.existsByIsbnAndIdNot(livroDto.getIsbn(), id)) {
+            throw new LivroJaExistenteException(
+                    "Já existe um livro cadastrado com o ISBN: " + livroDto.getIsbn());
+        }
         
         AutorEntity autor = autorRepository.findById(livroDto.getAutorId())
-            .orElseThrow(() -> new RuntimeException("Autor não encontrado com ID: " + livroDto.getAutorId()));
+            .orElseThrow(() -> new AutorIdNaoEncontrado("Autor não encontrado com ID: " + livroDto.getAutorId()));
             
         CategoriaEntity categoria = categoriaRepository.findById(livroDto.getCategoriaId())
             .orElseThrow(() -> new CategoriaNaoEncontradaException(livroDto.getCategoriaId()));
@@ -94,12 +104,13 @@ public class BibliotecaService {
         entidadeLivroRecebida.setTitulo(livroDto.getTitulo());
         entidadeLivroRecebida.setDescricao(livroDto.getDescricao());
         entidadeLivroRecebida.setDataPublicacao(livroDto.getPublicado());
+        entidadeLivroRecebida.setIsbn(livroDto.getIsbn());
         entidadeLivroRecebida.setAutor(autor);
         entidadeLivroRecebida.setCategoria(categoria);
 
-        livroRepository.save(entidadeLivroRecebida);
+        LivroEntity livroAtualizado = livroRepository.save(entidadeLivroRecebida);
 
-        return livroMapper.converterParaResponse(entidadeLivroRecebida);
+        return livroMapper.converterParaResponse(livroAtualizado);
     }
 
     public LivroResponse deletarLivro(Integer id) {

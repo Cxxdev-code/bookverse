@@ -27,6 +27,7 @@ public class LivroDto {
     @Size(max = 5000, message = "A descriçao deve ter no máximo 5000 caracteres")
     private String descricao;
 
+    @NotNull(message = "A data de publicacao e obrigatoria")
     private LocalDate publicado;
 
     @NotBlank(message = "O ISBN é obrigatório")

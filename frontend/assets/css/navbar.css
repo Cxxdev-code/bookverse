@@ -122,6 +122,43 @@
 
 }
 
+.nav-login-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    margin-left:16px;
+
+    padding:9px 15px;
+
+    border:1px solid var(--gold);
+
+    border-radius:10px;
+
+    color:var(--gold);
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:var(--transition);
+
+}
+
+.nav-login-btn:hover,
+.nav-login-btn.active{
+
+    background:var(--gold);
+
+    color:#111827;
+
+}
+
 .perfil-btn:hover{
 
     transform:scale(1.15);
@@ -151,6 +188,14 @@
     .perfil-btn{
 
         margin-left:12px;
+
+    }
+
+    .nav-login-btn{
+
+        margin-left:10px;
+
+        padding:8px 11px;
 
     }
 

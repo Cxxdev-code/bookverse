@@ -18,6 +18,9 @@ import lombok.Setter;
 @Getter
 @Builder
 public class UsuarioResponse {
+
+    @NotNull
+    private Integer id;
     
     @NotBlank
     private String nome;

@@ -17,8 +17,10 @@ public class LivroResponse {
     private Integer id;
     private String titulo;
     private String descricao;
+    private Integer autorId;
     private String autor;
     private String isbn;      
+    private Integer categoriaId;
     private String categoria;  
     private LocalDate publicado;
 }

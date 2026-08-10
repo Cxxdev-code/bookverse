@@ -55,7 +55,7 @@ function criarCardLivro(livro) {
         <div class="book-card h-100">
             <div class="book-cover position-relative">
                 <img
-                    src="${livro.imagem || 'assets/img/baner.png'}"
+                    src="${livro.imagem || 'assets/img/capa.png'}"
                     alt="${livro.titulo}"
                     class="book-image">
                 <span class="categoria-badge position-absolute top-0 end-0 m-3 badge bg-warning text-dark">
@@ -68,9 +68,9 @@ function criarCardLivro(livro) {
                     <p class="book-author text-muted mb-2">${livro.autor}</p>
                     <small class="book-isbn d-block text-secondary mb-2">ISBN: ${livro.isbn || 'N/A'}</small>
                 </div>
-                <button class="btn btn-book w-100 mt-2">
-                    <i class="bi bi-book"></i> Ler Agora
-                </button>
+                <a class="btn btn-book w-100 mt-2" data-livro-id="${livro.id}" href="ler.html?id=${encodeURIComponent(livro.id)}">
+                    <i class="bi bi-book"></i> Ler
+                </a>
             </div>
         </div>
     </div>

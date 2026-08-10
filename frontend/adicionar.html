@@ -19,21 +19,51 @@
     <link rel="stylesheet" href="assets/css/adicionar.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
-<body>
+<body data-pagina="adicionar">
     <nav class="navbar navbar-expand-lg fixed-top navbar-bookverse">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><i class="bi bi-book-half"></i>BookVerse</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu"><span class="navbar-toggler-icon"></span></button>
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-book-half"></i>
+                BookVerse
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
-                    <li class="nav-item"><a class="nav-link" href="livros.html">Biblioteca</a></li>
-                    <li class="nav-item"><a class="nav-link" href="autores.html">Autores</a></li>
-                    <li class="nav-item"><a class="nav-link" href="categorias.html">Categorias</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="livros.html">Biblioteca</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="autores.html">Autores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categorias.html">Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="adicionar.html">Adicionar</a>
+                    </li>
                 </ul>
-                <form class="d-flex search-box" role="search" onsubmit="return false;"><input class="form-control" type="search" placeholder="Pesquisar livros..." aria-label="Pesquisar livros" autocomplete="off"></form>
-                <a href="perfil.html" class="perfil-btn" aria-label="Abrir perfil"><i class="bi bi-person-circle"></i></a>
+
+                <form class="d-flex search-box">
+                    <input class="form-control"
+                           type="search"
+                           placeholder="Pesquisar livros...">
+                </form>
+
+                <a href="login.html" class="nav-login-btn"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+
+                <a href="perfil.html" class="perfil-btn">
+                    <i class="bi bi-person-circle"></i>
+                </a>
             </div>
         </div>
     </nav>
@@ -50,14 +80,14 @@
         <section class="add-content">
             <div class="container">
                 <div class="add-progress" aria-label="Etapas do cadastro">
-                    <div class="progress-step active"><span>1</span><strong>Livro</strong></div>
-                    <div class="progress-line"></div>
-                    <div class="progress-step"><span>2</span><strong>Autor</strong></div>
-                    <div class="progress-line"></div>
-                    <div class="progress-step"><span>3</span><strong>Categoria</strong></div>
+                    <div class="progress-step active" data-etapa="livro"><span>1</span><strong>Livro</strong></div>
+                    <div class="progress-line" data-linha="autor"></div>
+                    <div class="progress-step" data-etapa="autor"><span>2</span><strong>Autor</strong></div>
+                    <div class="progress-line" data-linha="categoria"></div>
+                    <div class="progress-step" data-etapa="categoria"><span>3</span><strong>Categoria</strong></div>
                 </div>
 
-                <div id="mensagemFormulario" class="form-message d-none" role="alert"></div>
+                <div id="mensagemFormulario" class="form-message d-none" data-base-class="form-message" role="alert"></div>
 
                 <form id="formAdicionarLivro" novalidate>
                     <div class="row g-4">
@@ -68,7 +98,7 @@
                                     <div class="col-12"><label for="titulo" class="form-label">Título</label><input id="titulo" class="form-control form-book" type="text" maxlength="255" required placeholder="Ex.: Clean Code"></div>
                                     <div class="col-md-7"><label for="isbn" class="form-label">ISBN</label><input id="isbn" class="form-control form-book" type="text" required placeholder="Ex.: 978-0132350884"></div>
                                     <div class="col-md-5"><label for="publicado" class="form-label">Data de publicação</label><input id="publicado" class="form-control form-book" type="date" required></div>
-                                    <div class="col-12"><label for="descricao" class="form-label">Descrição</label><textarea id="descricao" class="form-control form-book" rows="6" required placeholder="Conte brevemente sobre este livro..."></textarea></div>
+                                    <div class="col-12"><label for="descricao" class="form-label">Descrição <small>(até 5.000 caracteres)</small></label><textarea id="descricao" class="form-control form-book" rows="6" maxlength="5000" required placeholder="Conte brevemente sobre este livro..."></textarea></div>
                                 </div>
                             </article>
                         </div>
@@ -132,8 +162,6 @@
     <footer class="footer"><div class="container"><hr><div class="text-center"><p>© 2026 BookVerse • Desenvolvido por Caina Henrique.</p></div></div></footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/api.js"></script>
-    <script src="assets/js/adicionar.js"></script>
+    <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>
