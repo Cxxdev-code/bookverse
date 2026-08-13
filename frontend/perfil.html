@@ -1,13 +1,217 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Perfil</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
-  </head>
-  <body>
-    <h1>Perfil</h1>
-    <script src="assets/js/usuario.js"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Acompanhe seus dados e explore o acervo da biblioteca digital BookVerse.">
+    <title>Meu perfil | BookVerse</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/perfil.css?v=profile-visual-1">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <script src="assets/js/core/nav-preload.js?v=1"></script>
+</head>
+
+<body data-pagina="perfil" class="profile-page">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-bookverse" aria-label="Navegação principal">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" aria-label="BookVerse - início">
+                <i class="bi bi-book-half" aria-hidden="true"></i>
+                <span>BookVerse</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="livros.html">Biblioteca</a></li>
+                    <li class="nav-item"><a class="nav-link" href="autores.html">Autores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="categorias.html">Categorias</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="historico.html">Usuários</a></li>
+                </ul>
+
+                <form class="d-flex search-box" role="search">
+                    <label class="visually-hidden" for="pesquisaNavbarPerfil">Pesquisar livros</label>
+                    <input id="pesquisaNavbarPerfil" class="form-control" type="search" placeholder="Pesquisar livros..." autocomplete="off">
+                </form>
+                <a href="login.html" class="nav-login-btn"><i class="bi bi-box-arrow-in-right" aria-hidden="true"></i> Login</a>
+                <a href="perfil.html" class="perfil-btn active" aria-current="page" aria-label="Abrir perfil"><i class="bi bi-person-circle" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="profile-main">
+        <section class="profile-hero" aria-labelledby="tituloPerfil">
+            <div class="container">
+                <div class="profile-hero-layout">
+                    <div class="profile-hero-copy">
+                        <p class="profile-kicker"><i class="bi bi-person-badge" aria-hidden="true"></i> Área do leitor</p>
+                        <h1 id="tituloPerfil">Sua jornada de leitura <span>começa por você.</span></h1>
+                        <p>Consulte seus dados, acompanhe a dimensão do acervo e encontre sempre uma nova história para descobrir.</p>
+                        <div class="profile-hero-actions">
+                            <a href="livros.html" class="profile-primary-action"><i class="bi bi-compass" aria-hidden="true"></i> Explorar biblioteca</a>
+                            <a href="adicionar.html" class="profile-secondary-action admin-only d-none"><i class="bi bi-plus-lg" aria-hidden="true"></i> Adicionar livro</a>
+                        </div>
+                    </div>
+
+                    <aside class="profile-hero-panel" aria-label="Seu espaço BookVerse">
+                        <div class="profile-hero-panel-mark" aria-hidden="true">
+                            <span class="profile-panel-orbit profile-panel-orbit-one"></span>
+                            <span class="profile-panel-orbit profile-panel-orbit-two"></span>
+                            <i class="bi bi-book-half"></i>
+                        </div>
+                        <div>
+                            <span class="profile-panel-label">BookVerse</span>
+                            <strong>Um lugar para cada nova descoberta.</strong>
+                            <p>Seu perfil conecta você a todo o nosso catálogo.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-content" aria-label="Dados do perfil">
+            <div class="container">
+                <div id="carregandoPerfil" class="profile-loading" role="status" aria-live="polite">
+                    <span class="profile-loading-icon"><i class="bi bi-arrow-repeat" aria-hidden="true"></i></span>
+                    <div><strong>Preparando seu perfil</strong><p>Estamos reunindo seus dados e as informações do acervo.</p></div>
+                </div>
+
+                <div id="conteudoPerfil" class="d-none">
+                    <div class="profile-overview">
+                        <article class="profile-card">
+                            <div class="profile-card-topline">
+                                <span class="profile-label"><i class="bi bi-stars" aria-hidden="true"></i> Leitor BookVerse</span>
+                                <span class="profile-status"><i class="bi bi-check2-circle" aria-hidden="true"></i> Perfil ativo</span>
+                            </div>
+                            <div class="profile-avatar" aria-hidden="true"><img id="imagemPerfil" class="d-none" alt="Imagem do perfil"><i id="iconePerfil" class="bi bi-person-fill"></i></div>
+                            <h2 id="nomeUsuario">Visitante</h2>
+                            <p class="profile-registration">Matrícula <strong id="matriculaUsuario">—</strong></p>
+                            <div class="profile-divider"></div>
+                            <p class="profile-message">Cada página lida é uma nova forma de enxergar o mundo.</p>
+                            <a class="profile-card-link" href="livros.html">Encontrar uma leitura <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+                        </article>
+
+                        <article class="profile-details">
+                            <header class="profile-details-header">
+                                <div>
+                                    <p class="profile-kicker"><i class="bi bi-card-list" aria-hidden="true"></i> Dados pessoais</p>
+                                    <h2>Informações do perfil</h2>
+                                    <p>Dados que identificam sua experiência dentro do BookVerse.</p>
+                                </div>
+                                <div class="profile-details-actions"><button id="btnEditarPerfil" type="button" class="profile-edit-trigger"><i class="bi bi-pencil-square" aria-hidden="true"></i> Editar perfil</button><span class="profile-details-symbol" aria-hidden="true"><i class="bi bi-fingerprint"></i></span></div>
+                            </header>
+
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <span class="detail-icon"><i class="bi bi-gender-ambiguous" aria-hidden="true"></i></span>
+                                    <div><span>Sexo</span><strong id="sexoUsuario">Não informado</strong></div>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon"><i class="bi bi-calendar-event" aria-hidden="true"></i></span>
+                                    <div><span>Data de nascimento</span><strong id="nascimentoUsuario">Não informado</strong></div>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon"><i class="bi bi-person-check" aria-hidden="true"></i></span>
+                                    <div><span>Idade</span><strong id="idadeUsuario">Não informada</strong></div>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon"><i class="bi bi-hash" aria-hidden="true"></i></span>
+                                    <div><span>Código do usuário</span><strong id="idUsuario">Não informado</strong></div>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon"><i class="bi bi-envelope" aria-hidden="true"></i></span>
+                                    <div><span>E-mail de acesso</span><strong id="emailUsuario">Não informado</strong></div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <section id="edicaoPerfil" class="profile-edit-panel d-none" aria-labelledby="tituloEdicaoPerfil">
+                        <header><div><p class="profile-kicker"><i class="bi bi-pencil-square" aria-hidden="true"></i> Sua conta</p><h2 id="tituloEdicaoPerfil">Editar perfil</h2><p>Você pode alterar seus dados pessoais e usar uma imagem por URL.</p></div><button id="btnCancelarEdicaoPerfil" type="button" class="profile-edit-cancel">Cancelar</button></header>
+                        <div id="mensagemPerfil" class="profile-form-message d-none" data-base-class="profile-form-message" role="alert"></div>
+                        <form id="formEditarPerfil" novalidate>
+                            <div class="profile-edit-grid">
+                                <div><label for="nomePerfilEdicao">Nome</label><input id="nomePerfilEdicao" class="form-control" type="text" required maxlength="255"></div>
+                                <div><label for="sexoPerfilEdicao">Sexo</label><select id="sexoPerfilEdicao" class="form-select" required><option value="">Selecione</option><option>Feminino</option><option>Masculino</option><option>Prefiro não informar</option><option>Não informado</option></select></div>
+                                <div><label for="nascimentoPerfilEdicao">Data de nascimento</label><input id="nascimentoPerfilEdicao" class="form-control" type="date" required></div>
+                                <div><label for="imagemPerfilEdicao">Imagem de perfil <small>(opcional)</small></label><input id="imagemPerfilEdicao" class="form-control" type="url" maxlength="2048" placeholder="https://exemplo.com/foto.jpg"></div>
+                            </div>
+                            <button id="btnSalvarPerfil" class="profile-primary-action" type="submit"><i class="bi bi-check2-circle" aria-hidden="true"></i> Salvar alterações</button>
+                        </form>
+                    </section>
+
+                    <section class="profile-library" aria-labelledby="tituloPerfilBiblioteca">
+                        <header class="profile-library-title">
+                            <div>
+                                <p class="profile-kicker"><i class="bi bi-collection" aria-hidden="true"></i> Seu universo BookVerse</p>
+                                <h2 id="tituloPerfilBiblioteca">O acervo ao seu alcance</h2>
+                                <p>Acompanhe o que já está pronto para a sua próxima exploração.</p>
+                            </div>
+                            <a href="livros.html" class="profile-section-link">Ver biblioteca <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+                        </header>
+
+                        <div class="profile-stats-grid">
+                            <article class="profile-stat">
+                                <span class="profile-stat-icon"><i class="bi bi-book" aria-hidden="true"></i></span>
+                                <strong id="livrosPerfil">0</strong>
+                                <span>Livros disponíveis</span>
+                            </article>
+                            <article class="profile-stat">
+                                <span class="profile-stat-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+                                <strong id="autoresPerfil">0</strong>
+                                <span>Autores cadastrados</span>
+                            </article>
+                            <article class="profile-stat">
+                                <span class="profile-stat-icon"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i></span>
+                                <strong id="categoriasPerfil">0</strong>
+                                <span>Categorias exploradas</span>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="profile-shortcuts" aria-label="Atalhos da conta">
+                        <a href="autores.html" class="profile-shortcut-card"><span class="profile-shortcut-icon"><i class="bi bi-person-heart" aria-hidden="true"></i></span><span><strong>Conheça autores</strong><small>Veja quem dá vida às histórias.</small></span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+                        <a href="categorias.html" class="profile-shortcut-card"><span class="profile-shortcut-icon"><i class="bi bi-grid" aria-hidden="true"></i></span><span><strong>Explore categorias</strong><small>Encontre seu próximo tema.</small></span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+                        <a href="adicionar.html" class="profile-shortcut-card admin-only d-none"><span class="profile-shortcut-icon"><i class="bi bi-journal-plus" aria-hidden="true"></i></span><span><strong>Amplie o acervo</strong><small>Cadastre uma nova obra.</small></span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+                    </section>
+                </div>
+
+                <div id="perfilVazio" class="profile-empty-state d-none" aria-live="polite">
+                    <span class="profile-empty-icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
+                    <p class="profile-kicker"><i class="bi bi-person-badge" aria-hidden="true"></i> Sua conta BookVerse</p>
+                    <h2>Nenhum perfil cadastrado ainda</h2>
+                    <p>Quando um usuário for cadastrado, os dados pessoais e o resumo da biblioteca aparecerão aqui.</p>
+                    <div class="profile-empty-actions">
+                        <a href="login.html" class="profile-primary-action"><i class="bi bi-box-arrow-in-right" aria-hidden="true"></i> Criar ou acessar conta</a>
+                        <a href="livros.html" class="profile-secondary-action"><i class="bi bi-book" aria-hidden="true"></i> Conhecer a biblioteca</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bookverse-footer">
+        <div class="container bookverse-footer-content">
+            <a class="bookverse-footer-brand" href="index.html"><i class="bi bi-book-half" aria-hidden="true"></i> BookVerse</a>
+            <p>Uma biblioteca digital para descobrir boas histórias.</p>
+            <div class="bookverse-footer-links"><a href="livros.html">Biblioteca</a><a href="autores.html">Autores</a><a href="categorias.html">Categorias</a></div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="assets/js/app.js?v=catalogo-api-1"></script>
+</body>
 </html>

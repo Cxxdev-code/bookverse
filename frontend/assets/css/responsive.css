@@ -1,9 +1,5 @@
-@media (max-width: 768px) {
-  body {
-    padding: 1rem;
-  }
-
-  nav {
-    flex-direction: column;
-  }
-}
+/*
+ * Os componentes mantêm suas próprias regras responsivas.
+ * Este arquivo continua carregado pelas páginas para preservar o contrato
+ * de estilos, sem sobrescrever a barra de navegação ou o espaçamento global.
+ */

@@ -1,9 +1,15 @@
 package backend.Entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,6 +46,7 @@ public class LivroEntity {
     private String titulo;
 
     @NotBlank
+    @Column(nullable = false, length = 5000)
     private String descricao;
 
     @ManyToOne
@@ -52,4 +59,42 @@ public class LivroEntity {
 
     @NotNull
     private LocalDate dataPublicacao;
+
+    @Column(name = "capa_url", length = 2048)
+    private String capaUrl;
+
+    @Column(name = "url_leitura", length = 2048)
+    private String urlLeitura;
+
+    @Column(name = "numero_paginas")
+    private Integer numeroPaginas;
+
+    @Column(length = 100)
+    private String idioma;
+
+    @Column(length = 255)
+    private String editora;
+
+    @Column(length = 100)
+    private String edicao;
+
+    @Column(name = "classificacao_etaria", length = 20)
+    private String classificacaoEtaria;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    @Builder.Default
+    private StatusLivro status = StatusLivro.RASCUNHO;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private Boolean destaque = false;
+
+    @CreationTimestamp
+    @Column(name = "criado_em", nullable = false, updatable = false)
+    private LocalDateTime criadoEm;
+
+    @UpdateTimestamp
+    @Column(name = "atualizado_em", nullable = false)
+    private LocalDateTime atualizadoEm;
 }

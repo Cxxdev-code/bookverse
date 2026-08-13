@@ -1,11 +1,92 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-body{
-    font-family:'Poppins', sans-serif;
-    background-color:#0F172A;
-    color:#F8FAFC;
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-width: 320px;
+    color: var(--text);
+    background: var(--bg);
+    font-family: "Poppins", sans-serif;
+}
+
+main {
+    min-height: calc(100vh - 77px);
+}
+
+.gold {
+    color: var(--gold);
+}
+
+::selection {
+    color: #17130a;
+    background: var(--gold);
+}
+
+.bookverse-footer {
+    border-top: 1px solid rgba(148, 163, 184, .14);
+    background: #070f1b;
+}
+
+.bookverse-footer-content {
+    display: grid;
+    grid-template-columns: auto minmax(180px, 1fr) auto;
+    align-items: center;
+    gap: 22px;
+    min-height: 92px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.bookverse-footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold);
+    font-size: 1.08rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.bookverse-footer-content > p {
+    margin: 0;
+    color: #8f9bac;
+    font-size: .78rem;
+}
+
+.bookverse-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 17px;
+}
+
+.bookverse-footer-links a {
+    color: #abb7c6;
+    font-size: .76rem;
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.bookverse-footer-links a:hover {
+    color: var(--gold-light);
+}
+
+@media (max-width: 767px) {
+    .bookverse-footer-content {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        min-height: 0;
+        padding-top: 27px;
+        padding-bottom: 27px;
+    }
+
+    .bookverse-footer-links {
+        justify-content: flex-start;
+    }
 }

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitura | BookVerse</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/leitura.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <script src="assets/js/core/nav-preload.js?v=1"></script>
+</head>
+<body data-pagina="leitura">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-bookverse">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-book-half"></i> BookVerse</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="livros.html">Biblioteca</a></li>
+                    <li class="nav-item"><a class="nav-link" href="autores.html">Autores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="categorias.html">Categorias</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="historico.html">Usuários</a></li>
+                </ul>
+                <form class="d-flex search-box">
+                    <input class="form-control" type="search" placeholder="Pesquisar livros..." autocomplete="off" aria-label="Pesquisar livros">
+                </form>
+                <a href="login.html" class="nav-login-btn"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                <a href="perfil.html" class="perfil-btn" aria-label="Abrir perfil"><i class="bi bi-person-circle"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="reader-page">
+        <div id="estadoLeitura" aria-live="polite">
+            <div class="reader-state-card">
+                <div class="spinner-border text-warning" role="status"><span class="visually-hidden">Carregando...</span></div>
+                <h1>Preparando sua leitura</h1>
+                <p>Buscando as informações do livro.</p>
+            </div>
+        </div>
+
+        <div id="livroLeitura" class="d-none">
+            <section class="reader-header">
+                <div class="container">
+                    <a class="reader-breadcrumb" href="livros.html"><i class="bi bi-arrow-left"></i> Voltar para a Biblioteca</a>
+                    <span id="codigoLivroLeitura" class="reader-eyebrow"><i class="bi bi-journal-bookmark-fill"></i> Livro</span>
+                    <div class="reader-header-content">
+                        <h1 id="tituloLivroLeitura">Carregando livro...</h1>
+                        <p class="reader-author">por <strong id="autorLivroLeitura">Carregando...</strong> <span aria-hidden="true">•</span> <span id="categoriaLivroLeitura">Categoria</span></p>
+                        <p id="descricaoLivroLeitura" class="reader-summary"></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="reader-book">
+                <div class="container">
+                    <div class="row g-4 align-items-start">
+                        <div class="col-lg-4">
+                            <article class="reader-cover-card">
+                                <img id="capaLivroLeitura" src="assets/img/capa.png" alt="Capa do livro">
+                                <div class="reader-cover-caption"><i class="bi bi-shield-check"></i> Informações verificadas pela Biblioteca</div>
+                            </article>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="reader-meta-grid" aria-label="Informações principais do livro">
+                                <div class="reader-meta-item"><i class="bi bi-upc-scan"></i><div><span>ISBN</span><strong id="isbnLivroLeitura">—</strong></div></div>
+                                <div class="reader-meta-item"><i class="bi bi-calendar-event"></i><div><span>Publicação</span><strong id="publicadoLivroLeitura">—</strong></div></div>
+                                <div class="reader-meta-item"><i class="bi bi-book"></i><div><span>Páginas</span><strong id="paginasLivroLeitura">—</strong></div></div>
+                                <div class="reader-meta-item"><i class="bi bi-translate"></i><div><span>Idioma</span><strong id="idiomaLivroLeitura">—</strong></div></div>
+                                <div class="reader-meta-item"><i class="bi bi-buildings"></i><div><span>Editora</span><strong id="editoraLivroLeitura">—</strong></div></div>
+                                <div class="reader-meta-item"><i class="bi bi-collection"></i><div><span>Edição</span><strong id="edicaoLivroLeitura">—</strong></div></div>
+                            </div>
+
+                            <article class="reader-information-card">
+                                <span class="reader-status"><i class="bi bi-info-circle"></i> Sobre este registro</span>
+                                <h2>Dados da Biblioteca</h2>
+                                <div class="reader-identifiers">
+                                    <div><span>Código do autor</span><strong id="autorIdLivroLeitura">—</strong></div>
+                                    <div><span>Código da categoria</span><strong id="categoriaIdLivroLeitura">—</strong></div>
+                                    <div><span>Classificação</span><strong id="classificacaoLivroLeitura">—</strong></div>
+                                    <div><span>Status do registro</span><strong id="statusLivroLeitura">—</strong></div>
+                                </div>
+                            </article>
+
+                            <article id="conteudoIndisponivel" class="reader-placeholder mt-4">
+                                <div class="reader-placeholder-icon"><i class="bi bi-book"></i></div>
+                                <span class="reader-status"><i class="bi bi-clock-history"></i> Em desenvolvimento</span>
+                                <h2>Conteúdo de leitura em breve</h2>
+                                <p>Esta página já reúne os dados deste livro. O texto completo, capítulos, marcador de progresso e recursos de leitura ainda não fazem parte do BookVerse nesta etapa.</p>
+                                <a id="linkLeituraExterna" class="reader-external-link d-none" href="#" target="_blank" rel="noopener noreferrer"><i class="bi bi-box-arrow-up-right"></i> Abrir leitura externa</a>
+                                <a class="reader-back-button" href="livros.html"><i class="bi bi-collection"></i> Explorar outros livros</a>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="reader-footer"><div class="container">© 2026 BookVerse • Desenvolvido por Caina Henrique.</div></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="assets/js/app.js?v=catalogo-api-1"></script>
+</body>
+</html>

@@ -1,166 +1,203 @@
-/* ===========================
-   NAVBAR
-=========================== */
-
-.navbar {
-
-    background: rgba(15, 23, 42, 0.95);
-
-    backdrop-filter: blur(15px);
-
-    border-bottom: 1px solid rgba(212, 175, 55, .15);
-
-    padding: 18px 0;
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 999;
-
-    transition: .3s;
+.navbar-bookverse {
+    min-height: 77px;
+    border-bottom: 1px solid rgba(148, 163, 184, .18);
+    background: rgba(8, 14, 24, .84);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 7px 22px rgba(0, 0, 0, .08);
+    transition: var(--transition);
 }
 
-/* ===========================
-   LOGO
-=========================== */
+.navbar-bookverse .container {
+    min-height: 77px;
+}
 
 .navbar-brand {
-
-    font-size: 2rem;
-
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--gold) !important;
+    font-size: 1.65rem;
     font-weight: 700;
-
-    color: #FFFFFF;
-
-    transition: .3s;
-
+    letter-spacing: -.04em;
 }
 
-.navbar-brand:hover {
-
-    color: #D4AF37;
-
-    transform: scale(1.05);
-
+.navbar-brand i {
+    font-size: 1.48rem;
 }
-
-/* ===========================
-   LINKS
-=========================== */
 
 .nav-link {
-
-    color: #E2E8F0;
-
-    font-weight: 500;
-
-    margin-left: 18px;
-
     position: relative;
-
-    transition: .3s;
-
+    padding: 9px 2px !important;
+    color: #e5eaf1 !important;
+    font-size: .91rem;
+    font-weight: 600;
+    transition: color var(--transition);
 }
 
-.nav-link:hover {
+.nav-item + .nav-item {
+    margin-left: 25px;
+}
 
-    color: #D4AF37;
-
+/* O identificador da sessão é aplicado no head. Assim, o administrador já
+   recebe os itens restritos no primeiro desenho da navbar, sem efeito de salto. */
+html.navbar-administrador .navbar-bookverse .nav-item.admin-only.d-none {
+    display: block !important;
 }
 
 .nav-link::after {
-
-    content: "";
-
     position: absolute;
-
+    bottom: -7px;
     left: 0;
-
-    bottom: -8px;
-
     width: 0;
-
     height: 2px;
-
-    background: #D4AF37;
-
-    transition: .3s;
-
+    border-radius: 999px;
+    content: "";
+    background: var(--gold);
+    transition: width var(--transition);
 }
 
-.nav-link:hover::after {
+.nav-link:hover,
+.nav-link.active {
+    color: var(--gold) !important;
+}
 
+.nav-link:hover::after,
+.nav-link.active::after {
     width: 100%;
-
 }
 
-/* ===========================
-   PESQUISA
-=========================== */
-
-.navbar form {
-
-    width: 42%;
-
+.search-box {
+    width: 245px;
+    margin-left: 25px;
 }
 
-.form-control {
-
-    background: #1E293B;
-
-    border: 1px solid transparent;
-
-    color: white;
-
-    border-radius: 12px;
-
-    padding: 12px 18px;
-
-    transition: .3s;
-
+.search-box input {
+    min-height: 40px;
+    padding: 8px 15px;
+    border: 1px solid rgba(148, 163, 184, .22);
+    border-radius: 999px;
+    color: var(--text);
+    background: rgba(148, 163, 184, .055);
+    font-size: .83rem;
 }
 
-.form-control::placeholder {
-
-    color: #94A3B8;
-
+.search-box input::placeholder {
+    color: #96a2b2;
 }
 
-.form-control:focus {
-
-    background: #1E293B;
-
-    color: white;
-
-    border: 1px solid #D4AF37;
-
-    box-shadow: 0 0 15px rgba(212,175,55,.25);
-
+.search-box input:focus {
+    border-color: rgba(212, 175, 55, .7);
+    color: var(--text);
+    background: rgba(14, 25, 40, .95);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, .08);
 }
 
-/* ===========================
-   PERFIL
-=========================== */
-
-.bi-person-circle {
-
-    margin-right: 5px;
-
+.nav-login-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 39px;
+    margin-left: 13px;
+    padding: 7px 12px;
+    border: 1px solid rgba(212, 175, 55, .65);
+    border-radius: 10px;
+    color: var(--gold-light);
+    background: rgba(212, 175, 55, .035);
+    font-size: .8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
 }
 
-/* ===========================
-   BOTÃO HAMBURGUER
-=========================== */
+.nav-login-btn:hover,
+.nav-login-btn.active {
+    border-color: var(--gold);
+    color: #17130a;
+    background: var(--gold);
+}
+
+.perfil-btn {
+    display: inline-grid;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    place-items: center;
+    border: 1px solid rgba(212, 175, 55, .35);
+    border-radius: 50%;
+    color: var(--gold);
+    font-size: 1.22rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.perfil-btn:hover {
+    border-color: var(--gold);
+    color: #17130a;
+    background: var(--gold);
+    transform: translateY(-1px);
+}
+
+/* Para leitores, o menu tem menos itens que o administrativo. Esta regra o
+   centraliza na página inteira, enquanto a busca e o perfil permanecem à direita. */
+@media (min-width: 1280px) {
+    html.navbar-usuario .navbar-bookverse .container {
+        position: relative;
+    }
+
+    html.navbar-usuario .navbar-bookverse .navbar-collapse {
+        position: static;
+    }
+
+    html.navbar-usuario .navbar-bookverse .navbar-nav {
+        position: absolute;
+        left: 50%;
+        margin: 0 !important;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+
+    html.navbar-usuario .navbar-bookverse .search-box {
+        margin-left: auto;
+    }
+}
+
+@media (min-width: 1280px) and (max-width: 1399px) {
+    html.navbar-usuario .nav-item + .nav-item { margin-left: 16px; }
+    html.navbar-usuario .search-box { width: 195px; }
+}
 
 .navbar-toggler {
-
-    border: none;
-
+    border-color: rgba(212, 175, 55, .48) !important;
+    box-shadow: none !important;
 }
 
-.navbar-toggler:focus {
+.navbar-toggler-icon {
+    filter: invert(91%) sepia(17%) saturate(573%) hue-rotate(359deg) brightness(95%) contrast(91%);
+}
 
-    box-shadow: none;
+@media (min-width: 992px) and (max-width: 1275px) {
+    .nav-item + .nav-item { margin-left: 16px; }
+    .nav-link { font-size: .84rem; }
+    .search-box { width: 195px; margin-left: 16px; }
+    .nav-login-btn { margin-left: 9px; padding-inline: 10px; }
+    .perfil-btn { margin-left: 7px; }
+}
 
+@media (max-width: 991px) {
+    .navbar-bookverse,
+    .navbar-bookverse .container { min-height: 68px; }
+    .navbar-collapse {
+        margin: 8px -12px -1px;
+        padding: 15px;
+        border: 1px solid rgba(148, 163, 184, .17);
+        border-radius: 0 0 14px 14px;
+        background: rgba(8, 14, 24, .98);
+        box-shadow: 0 20px 35px rgba(0, 0, 0, .25);
+    }
+    .navbar-nav { margin: 0 0 10px !important; }
+    .nav-item + .nav-item { margin-left: 0; }
+    .nav-link::after { bottom: 2px; }
+    .search-box { width: 100%; margin: 8px 0 0; }
+    .nav-login-btn { width: max-content; margin: 13px 0 0; }
+    .perfil-btn { margin: 13px 0 0 9px; vertical-align: bottom; }
 }

@@ -25,11 +25,18 @@ public class UsuarioMapper {
 
     public UsuarioResponse converterParaResponse(UsuarioEntity usuario) {
         return UsuarioResponse.builder()
+                .id(usuario.getId())
                 .nome(usuario.getNome())
                 .sexo(usuario.getSexo())
                 .idade(usuario.getIdade())
                 .dataNascimento(usuario.getDataNascimento())
                 .matricula(usuario.getMatricula())
+                .email(usuario.getEmail())
+                .papel(usuario.getPapel())
+                .ativo(usuario.getAtivo())
+                .imagemPerfilUrl(usuario.getImagemPerfilUrl())
+                .criadoEm(usuario.getCriadoEm())
+                .ultimoAcessoEm(usuario.getUltimoAcessoEm())
                 .build();
     }
 

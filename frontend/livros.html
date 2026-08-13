@@ -1,13 +1,149 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Livros</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
-  </head>
-  <body>
-    <h1>Livros</h1>
-    <script src="assets/js/livros.js"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore, pesquise e organize os livros disponíveis na biblioteca BookVerse.">
+    <title>Biblioteca | BookVerse</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/cards.css">
+    <link rel="stylesheet" href="assets/css/livro.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <script src="assets/js/core/nav-preload.js?v=1"></script>
+</head>
+
+<body data-pagina="livros" class="library-page">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-bookverse" aria-label="Navegação principal">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" aria-label="BookVerse - início">
+                <i class="bi bi-book-half" aria-hidden="true"></i>
+                <span>BookVerse</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="livros.html">Biblioteca</a></li>
+                    <li class="nav-item"><a class="nav-link" href="autores.html">Autores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="categorias.html">Categorias</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="historico.html">Usuários</a></li>
+                </ul>
+
+                <form class="d-flex search-box" role="search">
+                    <label class="visually-hidden" for="pesquisaNavbarBiblioteca">Pesquisar livros</label>
+                    <input id="pesquisaNavbarBiblioteca" class="form-control" type="search" placeholder="Pesquisar livros..." autocomplete="off">
+                </form>
+                <a href="login.html" class="nav-login-btn"><i class="bi bi-box-arrow-in-right" aria-hidden="true"></i> Login</a>
+                <a href="perfil.html" class="perfil-btn" aria-label="Abrir perfil"><i class="bi bi-person-circle" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="library-hero" aria-labelledby="tituloBiblioteca">
+            <div class="container">
+                <div class="library-hero-layout">
+                    <div class="library-hero-copy">
+                        <p class="library-kicker"><i class="bi bi-book-half" aria-hidden="true"></i> Catálogo BookVerse</p>
+                        <h1 id="tituloBiblioteca">Uma biblioteca para <span>toda curiosidade.</span></h1>
+                        <p>Pesquise, filtre e encontre a próxima história ou conhecimento que você quer levar com você.</p>
+                        <a href="adicionar.html" class="library-hero-link admin-only d-none"><i class="bi bi-plus-circle" aria-hidden="true"></i> Adicionar um livro ao acervo</a>
+                    </div>
+
+                    <div class="library-metrics" aria-label="Resumo da biblioteca">
+                        <article class="library-metric-card">
+                            <span class="library-metric-icon"><i class="bi bi-book" aria-hidden="true"></i></span>
+                            <strong id="quantidadeLivros">0</strong>
+                            <span>Livros disponíveis</span>
+                        </article>
+                        <article class="library-metric-card">
+                            <span class="library-metric-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+                            <strong id="quantidadeAutores">0</strong>
+                            <span>Autores cadastrados</span>
+                        </article>
+                        <article class="library-metric-card">
+                            <span class="library-metric-icon"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i></span>
+                            <strong id="quantidadeCategorias">0</strong>
+                            <span>Categorias exploradas</span>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="library-explorer" aria-label="Ferramentas para explorar o catálogo">
+            <div class="container">
+                <div class="library-controls-surface">
+                    <div class="library-search-row">
+                        <div class="library-search-field">
+                            <label class="visually-hidden" for="pesquisaLivro">Pesquisar no catálogo</label>
+                            <i class="bi bi-search" aria-hidden="true"></i>
+                            <input id="pesquisaLivro" type="search" placeholder="Pesquisar por título, autor, ISBN ou descrição..." autocomplete="off">
+                            <button id="btnPesquisar" class="btn btn-book" type="button">Pesquisar <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+                        </div>
+                        <a href="adicionar.html" class="library-add-shortcut admin-only d-none" title="Adicionar livro"><i class="bi bi-plus-lg" aria-hidden="true"></i><span>Novo livro</span></a>
+                    </div>
+
+                    <div class="library-filter-row">
+                        <div class="library-filter-heading">
+                            <span class="library-control-label">Explorar por categoria</span>
+                            <p>Refine o catálogo com um tema de interesse.</p>
+                        </div>
+                        <div id="listaCategorias" class="filter-list" aria-label="Filtros por categoria" aria-live="polite"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="library-catalog" aria-labelledby="tituloCatalogo">
+            <div class="container">
+                <header class="library-catalog-toolbar">
+                    <div class="library-result">
+                        <p class="library-kicker"><i class="bi bi-stars" aria-hidden="true"></i> Acervo</p>
+                        <h2 id="tituloCatalogo">Livros disponíveis</h2>
+                        <p>Exibindo <strong id="quantidadeLivrosLista">0</strong> livros para você explorar.</p>
+                    </div>
+
+                    <div class="library-order">
+                        <label for="ordenacao">Ordenar por</label>
+                        <select id="ordenacao" class="form-select">
+                            <option value="recentes" selected>Mais recentes</option>
+                            <option value="antigos">Mais antigos</option>
+                            <option value="titulo_asc">Título A-Z</option>
+                            <option value="titulo_desc">Título Z-A</option>
+                        </select>
+                    </div>
+                </header>
+
+                <div id="listaLivros" class="row g-4" aria-live="polite"></div>
+                <nav id="paginacaoLivros" class="library-pagination" aria-label="Paginação do catálogo"></nav>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bookverse-footer">
+        <div class="container bookverse-footer-content">
+            <a class="bookverse-footer-brand" href="index.html"><i class="bi bi-book-half" aria-hidden="true"></i> BookVerse</a>
+            <p>Uma biblioteca digital para descobrir boas histórias.</p>
+            <div class="bookverse-footer-links"><a href="index.html">Início</a><a href="autores.html">Autores</a><a href="categorias.html">Categorias</a></div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="assets/js/app.js?v=catalogo-api-1"></script>
+</body>
 </html>

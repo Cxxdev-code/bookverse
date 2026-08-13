@@ -2,7 +2,6 @@ package backend.controller;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +16,6 @@ import backend.dto.Response.CategoriaResponse;
 import backend.service.CategoriaService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/categorias")
 @AllArgsConstructor
