@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.security.access.AccessDeniedException;
 
 import backend.exception.autor.AutorIdNaoEncontrado;
 import backend.exception.autor.AutorJaExistenteException;
@@ -22,6 +23,8 @@ import backend.exception.livro.LivroJaExistenteException;
 import backend.exception.livro.LivroNaoEncontradoPorIdExcption;
 import backend.exception.livro.LivroNaoEncontradoPorTituloException;
 import backend.exception.usuario.UsuarioIdNaoEncontradoException;
+import backend.exception.usuario.UsuarioJaExistenteException;
+import backend.exception.usuario.CredenciaisInvalidasException;
 import jakarta.validation.ConstraintViolationException;
 
 @RestControllerAdvice
@@ -78,6 +81,7 @@ public class globalerror {
     @ExceptionHandler({
             AutorJaExistenteException.class,
             CategoriaJaExistenteException.class,
+            UsuarioJaExistenteException.class,
             RecursoEmUsoException.class,
             DataIntegrityViolationException.class
     })
@@ -87,6 +91,16 @@ public class globalerror {
                 : ex.getMessage();
 
         return buildResponse(HttpStatus.CONFLICT, mensagem);
+    }
+
+    @ExceptionHandler(CredenciaisInvalidasException.class)
+    public ResponseEntity<Map<String, Object>> handleCredenciaisInvalidas(CredenciaisInvalidasException ex) {
+        return buildResponse(HttpStatus.UNAUTHORIZED, ex.getMessage());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Map<String, Object>> handleAcessoNegado(AccessDeniedException ex) {
+        return buildResponse(HttpStatus.FORBIDDEN, ex.getMessage());
     }
 
     @ExceptionHandler(Exception.class)

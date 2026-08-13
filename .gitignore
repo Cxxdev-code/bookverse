@@ -1,0 +1,8 @@
+# Bancos H2 locais: cada máquina recria os seus dados ao iniciar a API.
+data/*.mv.db
+data/*.trace.db
+data/*.lock.db
+backend/data/
+
+# Saída de compilação.
+backend/target/

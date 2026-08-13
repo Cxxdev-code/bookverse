@@ -38,6 +38,12 @@
     margin-left: 25px;
 }
 
+/* O identificador da sessão é aplicado no head. Assim, o administrador já
+   recebe os itens restritos no primeiro desenho da navbar, sem efeito de salto. */
+html.navbar-administrador .navbar-bookverse .nav-item.admin-only.d-none {
+    display: block !important;
+}
+
 .nav-link::after {
     position: absolute;
     bottom: -7px;
@@ -129,6 +135,35 @@
     color: #17130a;
     background: var(--gold);
     transform: translateY(-1px);
+}
+
+/* Para leitores, o menu tem menos itens que o administrativo. Esta regra o
+   centraliza na página inteira, enquanto a busca e o perfil permanecem à direita. */
+@media (min-width: 1280px) {
+    html.navbar-usuario .navbar-bookverse .container {
+        position: relative;
+    }
+
+    html.navbar-usuario .navbar-bookverse .navbar-collapse {
+        position: static;
+    }
+
+    html.navbar-usuario .navbar-bookverse .navbar-nav {
+        position: absolute;
+        left: 50%;
+        margin: 0 !important;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+
+    html.navbar-usuario .navbar-bookverse .search-box {
+        margin-left: auto;
+    }
+}
+
+@media (min-width: 1280px) and (max-width: 1399px) {
+    html.navbar-usuario .nav-item + .nav-item { margin-left: 16px; }
+    html.navbar-usuario .search-box { width: 195px; }
 }
 
 .navbar-toggler {

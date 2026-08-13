@@ -6,6 +6,7 @@ import backend.Entity.StatusLivro;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +43,10 @@ public class LivroDto {
 
     @Size(max = 2048, message = "A URL da capa deve ter no mÃ¡ximo 2048 caracteres")
     private String capaUrl;
+
+    @Size(max = 2048, message = "O link de leitura deve conter no máximo 2048 caracteres")
+    @Pattern(regexp = "https?://\\S+", message = "O link de leitura deve usar http:// ou https://")
+    private String urlLeitura;
 
     @jakarta.validation.constraints.Positive(message = "O nÃºmero de pÃ¡ginas deve ser maior que zero")
     private Integer numeroPaginas;

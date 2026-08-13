@@ -25,6 +25,7 @@ public class LivroDetalheResponse {
     private String categoria;
     private LocalDate publicado;
     private String capaUrl;
+    private String urlLeitura;
     private Integer numeroPaginas;
     private String idioma;
     private String editora;

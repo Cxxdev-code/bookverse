@@ -5,6 +5,37 @@ function capaSegura(valor) {
     return /^(https?:\/\/|assets\/)/i.test(capa) ? capa : "assets/img/capa.png";
 }
 
+function urlLeituraSegura(valor) {
+    try {
+        const url = new URL(String(valor || "").trim());
+        return ["http:", "https:"].includes(url.protocol) ? url.href : null;
+    } catch (_) {
+        return null;
+    }
+}
+
+function configurarLinkDeLeitura(livro) {
+    const painel = porId("conteudoIndisponivel");
+    const link = porId("linkLeituraExterna");
+    const url = urlLeituraSegura(livro.urlLeitura);
+    if (!painel || !link) return;
+
+    const status = painel.querySelector(".reader-status");
+    const titulo = painel.querySelector("h2");
+    const descricao = painel.querySelector("p");
+    if (!url) {
+        link.classList.add("d-none");
+        link.removeAttribute("href");
+        return;
+    }
+
+    if (status) status.innerHTML = '<i class="bi bi-box-arrow-up-right"></i> Leitura disponível';
+    if (titulo) titulo.textContent = "Acesse a leitura deste livro";
+    if (descricao) descricao.textContent = "A leitura é disponibilizada por uma fonte externa indicada no cadastro do livro. Ela será aberta em uma nova aba.";
+    link.href = url;
+    link.classList.remove("d-none");
+}
+
 function rotuloStatus(status) {
     return ({ RASCUNHO: "Rascunho", EM_REVISAO: "Em revisão", PUBLICADO: "Publicado", ARQUIVADO: "Arquivado" })[status] || "Não informado";
 }
@@ -32,6 +63,7 @@ export function renderizarLivroLeitura(livro) {
         capa.src = capaSegura(livro.capaUrl);
         capa.alt = `Capa de ${livro.titulo || "livro"}`;
     }
+    configurarLinkDeLeitura(livro);
     porId("estadoLeitura")?.classList.add("d-none");
     porId("livroLeitura")?.classList.remove("d-none");
 }

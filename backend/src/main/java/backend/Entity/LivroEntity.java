@@ -63,6 +63,9 @@ public class LivroEntity {
     @Column(name = "capa_url", length = 2048)
     private String capaUrl;
 
+    @Column(name = "url_leitura", length = 2048)
+    private String urlLeitura;
+
     @Column(name = "numero_paginas")
     private Integer numeroPaginas;
 

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="assets/css/cards.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/autores.css?v=people-catalog-1">
+    <script src="assets/js/core/nav-preload.js?v=1"></script>
 </head>
 
 <body data-pagina="autores" class="authors-page">
@@ -38,7 +39,8 @@
                     <li class="nav-item"><a class="nav-link" href="livros.html">Biblioteca</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="autores.html">Autores</a></li>
                     <li class="nav-item"><a class="nav-link" href="categorias.html">Categorias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="historico.html">Usuários</a></li>
                 </ul>
 
                 <form class="d-flex search-box" role="search">
@@ -62,7 +64,7 @@
 
                         <div class="people-hero-actions">
                             <a href="livros.html" class="people-primary-action"><i class="bi bi-compass" aria-hidden="true"></i> Explorar livros</a>
-                            <a href="adicionar.html" class="people-secondary-action"><i class="bi bi-journal-plus" aria-hidden="true"></i> Ampliar o acervo</a>
+                            <a href="adicionar.html" class="people-secondary-action admin-only d-none"><i class="bi bi-journal-plus" aria-hidden="true"></i> Ampliar o acervo</a>
                         </div>
                     </div>
 
@@ -103,7 +105,7 @@
                         <h2 id="tituloCatalogoAutores">Autores disponíveis</h2>
                         <p>Exibindo <strong id="quantidadeAutoresLista">0</strong> autores para você conhecer.</p>
                     </div>
-                    <a href="adicionar.html" class="people-heading-link">Cadastrar livro e autor <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+                    <a href="adicionar.html" class="people-heading-link admin-only d-none">Cadastrar livro e autor <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
                 </header>
 
                 <div id="carregandoAutores" class="people-loading" role="status">
@@ -119,7 +121,7 @@
                     <span class="people-empty-icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
                     <h3>Nenhum autor cadastrado ainda</h3>
                     <p>Quando um autor for cadastrado junto a um livro, ele aparecerá aqui.</p>
-                    <a href="adicionar.html">Adicionar o primeiro livro <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+                    <a href="adicionar.html" class="admin-only d-none">Adicionar o primeiro livro <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </section>

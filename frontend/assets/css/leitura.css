@@ -178,6 +178,30 @@
 .reader-placeholder h2 { margin:13px 0; font-size:1.7rem; font-weight:700; }
 .reader-placeholder p { max-width:610px; margin:0 auto; color:var(--text-secondary); line-height:1.8; }
 
+.reader-external-link {
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    margin:26px 8px 0;
+    padding:12px 19px;
+    border:1px solid var(--gold);
+    border-radius:10px;
+    color:#17130a;
+    background:linear-gradient(135deg, #f5cf4b, var(--gold));
+    box-shadow:0 10px 22px rgba(212, 175, 55, .2);
+    font-size:.92rem;
+    font-weight:700;
+    text-decoration:none;
+    transition:var(--transition);
+}
+
+.reader-external-link:hover {
+    color:#17130a;
+    background:#f6d55d;
+    box-shadow:0 13px 28px rgba(212, 175, 55, .3);
+    transform:translateY(-2px);
+}
+
 .reader-back-button {
     display:inline-flex;
     align-items:center;

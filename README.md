@@ -134,6 +134,7 @@ bookverse/
 - [Rotas e telas](docs/ROTAS_E_TELAS.md)
 - [Enriquecimento do catálogo no Back-end](docs/ENRIQUECIMENTO_CATALOGO_BACKEND.md)
 - [Alterações do Back-end](docs/ALTERACOES_BACKEND.md)
+- [Segurança e acessos](docs/SEGURANCA_E_ACESSOS.md)
 
 ## 🔜 Próximas etapas
 

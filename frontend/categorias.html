@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="assets/css/cards.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/categorias.css?v=people-catalog-1">
+    <script src="assets/js/core/nav-preload.js?v=1"></script>
 </head>
 
 <body data-pagina="categorias" class="categories-page">
@@ -38,7 +39,8 @@
                     <li class="nav-item"><a class="nav-link" href="livros.html">Biblioteca</a></li>
                     <li class="nav-item"><a class="nav-link" href="autores.html">Autores</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="categorias.html">Categorias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="historico.html">Usuários</a></li>
                 </ul>
 
                 <form class="d-flex search-box" role="search">
@@ -62,7 +64,7 @@
 
                         <div class="category-hero-actions">
                             <a href="livros.html" class="category-primary-action"><i class="bi bi-compass" aria-hidden="true"></i> Explorar biblioteca</a>
-                            <a href="adicionar.html" class="category-secondary-action"><i class="bi bi-plus-lg" aria-hidden="true"></i> Criar nova categoria</a>
+                            <a href="adicionar.html" class="category-secondary-action admin-only d-none"><i class="bi bi-plus-lg" aria-hidden="true"></i> Criar nova categoria</a>
                         </div>
                     </div>
 
@@ -113,7 +115,7 @@
                     <span class="category-empty-icon"><i class="bi bi-collection" aria-hidden="true"></i></span>
                     <h3>Nenhuma categoria cadastrada ainda</h3>
                     <p>Quando uma categoria for criada durante o cadastro de um livro, ela aparecerá aqui.</p>
-                    <a href="adicionar.html">Criar a primeira categoria <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+                    <a href="adicionar.html" class="admin-only d-none">Criar a primeira categoria <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </section>

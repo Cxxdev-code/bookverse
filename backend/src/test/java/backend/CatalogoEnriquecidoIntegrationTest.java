@@ -44,7 +44,7 @@ class CatalogoEnriquecidoIntegrationTest {
                 .descricao("Livros para validação")
                 .build());
 
-        bibliotecaService.adicionarLivro(livro("Livro publicado", "9780000000001", autor.getId(), categoria.getId(), StatusLivro.PUBLICADO));
+        var livroPublicado = bibliotecaService.adicionarLivro(livro("Livro publicado", "9780000000001", autor.getId(), categoria.getId(), StatusLivro.PUBLICADO));
         bibliotecaService.adicionarLivro(livro("Livro rascunho", "9780000000002", autor.getId(), categoria.getId(), StatusLivro.RASCUNHO));
 
         PageResponse<LivroCardResponse> pagina = bibliotecaService.buscarCatalogo(
@@ -55,6 +55,8 @@ class CatalogoEnriquecidoIntegrationTest {
         assertThat(pagina.getContent().getFirst().getCapaUrl()).isEqualTo("https://exemplo.com/capa.jpg");
         assertThat(pagina.getContent().getFirst().getNumeroPaginas()).isEqualTo(320);
         assertThat(pagina.getContent().getFirst().getStatus()).isEqualTo(StatusLivro.PUBLICADO);
+        assertThat(bibliotecaService.buscarLivroPorId(livroPublicado.getId(), false).getUrlLeitura())
+                .isEqualTo("https://exemplo.com/leitura-publica");
         assertThat(home.getTotais().getLivros()).isEqualTo(1);
         assertThat(home.getRecentes()).hasSize(1);
         assertThat(home.getCategorias().getFirst().getQuantidadeLivros()).isEqualTo(2);
@@ -71,6 +73,7 @@ class CatalogoEnriquecidoIntegrationTest {
                 .autorId(autorId)
                 .categoriaId(categoriaId)
                 .capaUrl("https://exemplo.com/capa.jpg")
+                .urlLeitura("https://exemplo.com/leitura-publica")
                 .numeroPaginas(320)
                 .idioma("Português")
                 .editora("Editora de teste")

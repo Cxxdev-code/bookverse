@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="assets/css/cards.css">
     <link rel="stylesheet" href="assets/css/livro.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <script src="assets/js/core/nav-preload.js?v=1"></script>
 </head>
 
 <body data-pagina="livros" class="library-page">
@@ -38,7 +39,8 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="livros.html">Biblioteca</a></li>
                     <li class="nav-item"><a class="nav-link" href="autores.html">Autores</a></li>
                     <li class="nav-item"><a class="nav-link" href="categorias.html">Categorias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="historico.html">Usuários</a></li>
                 </ul>
 
                 <form class="d-flex search-box" role="search">
@@ -59,7 +61,7 @@
                         <p class="library-kicker"><i class="bi bi-book-half" aria-hidden="true"></i> Catálogo BookVerse</p>
                         <h1 id="tituloBiblioteca">Uma biblioteca para <span>toda curiosidade.</span></h1>
                         <p>Pesquise, filtre e encontre a próxima história ou conhecimento que você quer levar com você.</p>
-                        <a href="adicionar.html" class="library-hero-link"><i class="bi bi-plus-circle" aria-hidden="true"></i> Adicionar um livro ao acervo</a>
+                        <a href="adicionar.html" class="library-hero-link admin-only d-none"><i class="bi bi-plus-circle" aria-hidden="true"></i> Adicionar um livro ao acervo</a>
                     </div>
 
                     <div class="library-metrics" aria-label="Resumo da biblioteca">
@@ -93,7 +95,7 @@
                             <input id="pesquisaLivro" type="search" placeholder="Pesquisar por título, autor, ISBN ou descrição..." autocomplete="off">
                             <button id="btnPesquisar" class="btn btn-book" type="button">Pesquisar <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
                         </div>
-                        <a href="adicionar.html" class="library-add-shortcut" title="Adicionar livro"><i class="bi bi-plus-lg" aria-hidden="true"></i><span>Novo livro</span></a>
+                        <a href="adicionar.html" class="library-add-shortcut admin-only d-none" title="Adicionar livro"><i class="bi bi-plus-lg" aria-hidden="true"></i><span>Novo livro</span></a>
                     </div>
 
                     <div class="library-filter-row">

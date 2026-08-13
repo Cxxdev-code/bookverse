@@ -3,9 +3,9 @@ package backend.dto.Response;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import backend.Entity.PapelUsuario;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,23 +19,24 @@ import lombok.Setter;
 @Builder
 public class UsuarioResponse {
 
-    @NotNull
     private Integer id;
     
-    @NotBlank
     private String nome;
 
-    @NotBlank
     private String sexo;
 
-    @NotNull
     private Integer idade;
     
-    @NotNull 
     private LocalDate dataNascimento;
 
-    @NotNull
     private Integer matricula;
+
+    private String email;
+    private PapelUsuario papel;
+    private Boolean ativo;
+    private String imagemPerfilUrl;
+    private LocalDateTime criadoEm;
+    private LocalDateTime ultimoAcessoEm;
 
 
 }

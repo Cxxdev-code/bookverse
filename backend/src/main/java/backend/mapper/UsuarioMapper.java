@@ -31,6 +31,12 @@ public class UsuarioMapper {
                 .idade(usuario.getIdade())
                 .dataNascimento(usuario.getDataNascimento())
                 .matricula(usuario.getMatricula())
+                .email(usuario.getEmail())
+                .papel(usuario.getPapel())
+                .ativo(usuario.getAtivo())
+                .imagemPerfilUrl(usuario.getImagemPerfilUrl())
+                .criadoEm(usuario.getCriadoEm())
+                .ultimoAcessoEm(usuario.getUltimoAcessoEm())
                 .build();
     }
 

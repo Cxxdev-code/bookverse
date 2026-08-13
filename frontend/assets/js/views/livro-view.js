@@ -1,4 +1,5 @@
 import { escaparHtml, formatarData, porId } from "../core/dom.js";
+import { ehAdministrador } from "../core/session.js";
 
 function resumo(texto, limite = 118) {
     const valor = texto || "Descrição não informada.";
@@ -17,7 +18,6 @@ export function renderizarLivros(livros, { layout = "library" } = {}) {
         lista.innerHTML = '<div class="col-12 text-center py-5"><h4 class="text-muted">Nenhum livro encontrado.</h4><p class="text-secondary mb-0">Tente alterar a pesquisa ou escolher outra categoria.</p></div>';
         return;
     }
-
     const home = layout === "home";
     const coluna = home ? "col-lg-4 col-md-6" : "col-xl-3 col-lg-4 col-md-6";
     lista.innerHTML = livros.map(livro => {
@@ -31,7 +31,6 @@ export function renderizarLivros(livros, { layout = "library" } = {}) {
         const metadados = home
             ? `<div class="book-meta book-meta--home"><small><i class="bi bi-calendar3"></i> ${data}</small>${paginas ? `<small><i class="bi bi-book"></i> ${escaparHtml(paginas)}</small>` : ""}</div>`
             : `<p class="book-description flex-grow-1">${escaparHtml(resumo(livro.descricaoResumo || livro.descricao))}</p><div class="book-meta"><small><i class="bi bi-calendar3"></i> ${data}</small>${paginas ? `<small><i class="bi bi-book"></i> ${escaparHtml(paginas)}</small>` : ""}${livro.isbn ? `<small><i class="bi bi-upc-scan"></i> ISBN: ${escaparHtml(livro.isbn)}</small>` : ""}</div>`;
-
         return `<div class="${coluna}"><article class="book-card book-card--catalog ${home ? "book-card--home" : "book-card--library"} h-100 d-flex flex-column">
             <a class="book-cover position-relative flex-shrink-0" href="${rotaLeitura}" aria-label="Ler ${titulo}">
                 <img src="${escaparHtml(capaSegura(livro.capaUrl))}" alt="Capa de ${titulo}" class="book-image">
@@ -56,23 +55,21 @@ export function renderizarFiltrosCategorias(categorias, categoriaAtiva) {
 export function renderizarPaginacao(resposta) {
     const paginacao = porId("paginacaoLivros");
     if (!paginacao) return;
-    if (!resposta || resposta.totalPages <= 1) {
-        paginacao.innerHTML = "";
-        return;
-    }
+    if (!resposta || resposta.totalPages <= 1) { paginacao.innerHTML = ""; return; }
     paginacao.innerHTML = `<button class="library-page-button" type="button" data-pagina="${resposta.page - 1}" ${resposta.hasPrevious ? "" : "disabled"}><i class="bi bi-arrow-left"></i><span>Anterior</span></button><span class="library-page-indicator">Página ${resposta.page + 1} de ${resposta.totalPages}</span><button class="library-page-button" type="button" data-pagina="${resposta.page + 1}" ${resposta.hasNext ? "" : "disabled"}><span>Próxima</span><i class="bi bi-arrow-right"></i></button>`;
 }
 
 export function renderizarDetalhesLivro(livro) {
     let modal = porId("modalDetalhesLivro");
     if (!modal) {
-        document.body.insertAdjacentHTML("beforeend", `<div class="modal fade" id="modalDetalhesLivro" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content bg-dark text-light border-secondary"><div class="modal-header border-secondary"><h5 class="modal-title">Detalhes do livro</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button></div><div id="conteudoDetalhesLivro" class="modal-body"></div></div></div></div>`);
+        document.body.insertAdjacentHTML("beforeend", '<div class="modal fade" id="modalDetalhesLivro" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content bg-dark text-light border-secondary"><div class="modal-header border-secondary"><h5 class="modal-title">Detalhes do livro</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button></div><div id="conteudoDetalhesLivro" class="modal-body"></div></div></div></div>');
         modal = porId("modalDetalhesLivro");
     }
-    const extras = [
-        ["Páginas", livro.numeroPaginas], ["Idioma", livro.idioma], ["Editora", livro.editora],
-        ["Edição", livro.edicao], ["Classificação", livro.classificacaoEtaria]
-    ].filter(([, valor]) => valor).map(([rotulo, valor]) => `<p class="mb-1"><strong>${rotulo}:</strong> ${escaparHtml(valor)}</p>`).join("");
-    porId("conteudoDetalhesLivro").innerHTML = `<p class="small text-secondary mb-1">Livro #${escaparHtml(livro.id)}</p><h4>${escaparHtml(livro.titulo)}</h4><p class="text-warning mb-3">${escaparHtml(livro.categoria || "Geral")}</p><p>${escaparHtml(livro.descricao || "Descrição não informada.")}</p><hr class="border-secondary"><p class="mb-1"><strong>Autor:</strong> ${escaparHtml(livro.autor || "Não informado")}</p><p class="mb-1"><strong>ISBN:</strong> ${escaparHtml(livro.isbn || "N/A")}</p><p class="mb-1"><strong>Publicação:</strong> ${formatarData(livro.publicado)}</p>${extras}`;
+    const extras = [["Páginas", livro.numeroPaginas], ["Idioma", livro.idioma], ["Editora", livro.editora], ["Edição", livro.edicao], ["Classificação", livro.classificacaoEtaria]]
+        .filter(([, valor]) => valor)
+        .map(([rotulo, valor]) => `<p class="mb-1"><strong>${rotulo}:</strong> ${escaparHtml(valor)}</p>`).join("");
+    const acaoAdministrativa = ehAdministrador()
+        ? `<a class="btn btn-warning w-100 mt-4" href="adicionar.html?editar=${encodeURIComponent(livro.id)}"><i class="bi bi-pencil-square"></i> Editar livro</a>` : "";
+    porId("conteudoDetalhesLivro").innerHTML = `<p class="small text-secondary mb-1">Livro #${escaparHtml(livro.id)}</p><h4>${escaparHtml(livro.titulo)}</h4><p class="text-warning mb-3">${escaparHtml(livro.categoria || "Geral")}</p><p>${escaparHtml(livro.descricao || "Descrição não informada.")}</p><hr class="border-secondary"><p class="mb-1"><strong>Autor:</strong> ${escaparHtml(livro.autor || "Não informado")}</p><p class="mb-1"><strong>ISBN:</strong> ${escaparHtml(livro.isbn || "N/A")}</p><p class="mb-1"><strong>Publicação:</strong> ${formatarData(livro.publicado)}</p>${extras}${acaoAdministrativa}`;
     window.bootstrap?.Modal.getOrCreateInstance(modal).show();
 }

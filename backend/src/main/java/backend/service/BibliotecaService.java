@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.security.access.AccessDeniedException;
 
 import backend.Entity.AutorEntity;
 import backend.Entity.CategoriaEntity;
@@ -76,6 +77,7 @@ public class BibliotecaService {
                 .autor(autor)
                 .categoria(categoria)
                 .capaUrl(limpar(livroDto.getCapaUrl()))
+                .urlLeitura(limpar(livroDto.getUrlLeitura()))
                 .numeroPaginas(livroDto.getNumeroPaginas())
                 .idioma(limpar(livroDto.getIdioma()))
                 .editora(limpar(livroDto.getEditora()))
@@ -88,16 +90,20 @@ public class BibliotecaService {
         return livroMapper.converterParaResponse(livroRepository.save(livro));
     }
 
-    public LivroDetalheResponse buscarLivroPorId(Integer id) {
+    public LivroDetalheResponse buscarLivroPorId(Integer id, boolean podeVerNaoPublicados) {
         LivroEntity livro = livroRepository.findById(id)
                 .orElseThrow(() -> new LivroNaoEncontradoPorIdExcption(id));
+        if (livro.getStatus() != StatusLivro.PUBLICADO && !podeVerNaoPublicados) {
+            throw new AccessDeniedException("Este livro ainda não está disponível para leitura.");
+        }
         return livroMapper.converterParaDetalheResponse(livro);
     }
 
     /** Busca legada por título; a nova busca está em GET /api/livros?busca=. */
     public List<LivroResponse> buscarLivroPorTitulo(String titulo) {
         if (titulo == null || titulo.trim().isEmpty()) return List.of();
-        return livroMapper.converterParaListaDeResponse(livroRepository.findByTituloContainingIgnoreCase(titulo));
+        return livroMapper.converterParaListaDeResponse(livroRepository.findByTituloContainingIgnoreCase(titulo)
+                .stream().filter(livro -> livro.getStatus() == StatusLivro.PUBLICADO).toList());
     }
 
     public LivroResponse editarLivro(Integer id, LivroDto livroDto) {
@@ -112,6 +118,7 @@ public class BibliotecaService {
         livro.setAutor(buscarAutor(livroDto.getAutorId()));
         livro.setCategoria(buscarCategoria(livroDto.getCategoriaId()));
         livro.setCapaUrl(limpar(livroDto.getCapaUrl()));
+        livro.setUrlLeitura(limpar(livroDto.getUrlLeitura()));
         livro.setNumeroPaginas(livroDto.getNumeroPaginas());
         livro.setIdioma(limpar(livroDto.getIdioma()));
         livro.setEditora(limpar(livroDto.getEditora()));

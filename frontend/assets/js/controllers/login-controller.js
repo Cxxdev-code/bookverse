@@ -1,27 +1,40 @@
-import { UsuarioModel } from "../models/usuario-model.js";
+import { AuthModel } from "../models/auth-model.js";
 import { definirCarregando, mostrarMensagem, ocultarMensagem, porId } from "../core/dom.js";
-import { salvarUsuarioAtivo } from "../core/session.js";
-import { alterarModoAuth, renderizarUsuariosLogin } from "../views/auth-view.js";
+import { obterUsuarioAtivo, salvarSessao } from "../core/session.js";
+import { alterarModoAuth } from "../views/auth-view.js";
 
-let usuarios = [];
-
-function redirecionarParaPerfil(texto) {
-    mostrarMensagem("mensagemAuth", "success", texto);
-    setTimeout(() => { window.location.href = "perfil.html"; }, 700);
+function destinoAposLogin() {
+    const retorno = new URLSearchParams(window.location.search).get("retorno");
+    return retorno && /^[a-z-]+\.html(?:\?.*)?$/i.test(retorno) ? retorno : "perfil.html";
 }
 
-function entrar(evento) {
+function redirecionar(texto) {
+    mostrarMensagem("mensagemAuth", "success", texto);
+    window.setTimeout(() => { window.location.href = destinoAposLogin(); }, 650);
+}
+
+async function entrar(evento) {
     evento.preventDefault();
     const formulario = evento.currentTarget;
+    const botao = porId("btnEntrar");
     if (!formulario.checkValidity()) {
         formulario.classList.add("was-validated");
-        mostrarMensagem("mensagemAuth", "error", "Selecione um usuário para continuar.");
+        mostrarMensagem("mensagemAuth", "error", "Informe seu e-mail e senha para continuar.");
         return;
     }
-    const matricula = porId("usuarioExistente").value;
-    const usuario = usuarios.find(item => String(item.matricula) === matricula);
-    salvarUsuarioAtivo(usuario);
-    redirecionarParaPerfil(`Olá, ${usuario.nome}! Abrindo seu perfil...`);
+    definirCarregando(botao, true, '<i class="bi bi-arrow-right-circle"></i> Entrar no BookVerse', "Verificando acesso...");
+    try {
+        const autenticacao = await AuthModel.entrar({
+            email: porId("emailLogin").value.trim(),
+            senha: porId("senhaLogin").value
+        });
+        salvarSessao(autenticacao);
+        redirecionar(`Olá, ${autenticacao.usuario.nome}! Seu acesso foi confirmado.`);
+    } catch (erro) {
+        mostrarMensagem("mensagemAuth", "error", erro.message);
+    } finally {
+        definirCarregando(botao, false, '<i class="bi bi-arrow-right-circle"></i> Entrar no BookVerse');
+    }
 }
 
 async function criarConta(evento) {
@@ -30,38 +43,44 @@ async function criarConta(evento) {
     const botao = porId("btnCriarConta");
     if (!formulario.checkValidity()) {
         formulario.classList.add("was-validated");
-        mostrarMensagem("mensagemAuth", "error", "Preencha seus dados para criar o perfil.");
+        mostrarMensagem("mensagemAuth", "error", "Preencha os campos obrigatórios para criar sua conta.");
         return;
     }
-    definirCarregando(botao, true, "<i class=\"bi bi-person-check-fill\"></i> Criar e entrar", "Criando perfil...");
+    if (porId("senhaNovoUsuario").value !== porId("confirmacaoSenhaNovoUsuario").value) {
+        mostrarMensagem("mensagemAuth", "error", "A confirmação de senha não corresponde à senha informada.");
+        return;
+    }
+    definirCarregando(botao, true, '<i class="bi bi-person-check-fill"></i> Criar e entrar', "Criando conta...");
     try {
-        const usuario = await UsuarioModel.criar({
+        const autenticacao = await AuthModel.registrar({
             nome: porId("nomeNovoUsuario").value.trim(),
+            email: porId("emailNovoUsuario").value.trim(),
+            senha: porId("senhaNovoUsuario").value,
             sexo: porId("sexoNovoUsuario").value,
-            dataNascimento: porId("nascimentoNovoUsuario").value
+            dataNascimento: porId("nascimentoNovoUsuario").value,
+            imagemPerfilUrl: porId("imagemNovoUsuario").value.trim() || null
         });
-        salvarUsuarioAtivo(usuario);
-        redirecionarParaPerfil("Perfil criado com sucesso. Preparando sua biblioteca...");
+        salvarSessao(autenticacao);
+        redirecionar("Conta criada com sucesso. Bem-vindo ao BookVerse!");
     } catch (erro) {
-        console.error(erro);
         mostrarMensagem("mensagemAuth", "error", erro.message);
     } finally {
-        definirCarregando(botao, false, "<i class=\"bi bi-person-check-fill\"></i> Criar e entrar");
+        definirCarregando(botao, false, '<i class="bi bi-person-check-fill"></i> Criar e entrar');
     }
 }
 
 export async function iniciarLogin() {
+    if (obterUsuarioAtivo()) {
+        window.location.replace("perfil.html");
+        return;
+    }
     document.querySelectorAll(".auth-tab").forEach(botao => botao.addEventListener("click", () => {
         alterarModoAuth(botao.dataset.authMode);
         ocultarMensagem("mensagemAuth");
     }));
     porId("formEntrar")?.addEventListener("submit", entrar);
     porId("formCriarConta")?.addEventListener("submit", criarConta);
-    try {
-        usuarios = await UsuarioModel.listar();
-        renderizarUsuariosLogin(usuarios);
-    } catch (erro) {
-        console.error(erro);
-        mostrarMensagem("mensagemAuth", "error", erro.message);
+    if (new URLSearchParams(window.location.search).get("motivo") === "sessao") {
+        mostrarMensagem("mensagemAuth", "error", "Sua sessão expirou. Entre novamente para continuar.");
     }
 }

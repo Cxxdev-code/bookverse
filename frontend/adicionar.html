@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/navbar.css">
     <link rel="stylesheet" href="assets/css/adicionar.css">
+    <script src="assets/js/core/nav-preload.js?v=1"></script>
 </head>
 
 <body data-pagina="adicionar" class="add-page">
@@ -36,7 +37,8 @@
                     <li class="nav-item"><a class="nav-link" href="livros.html">Biblioteca</a></li>
                     <li class="nav-item"><a class="nav-link" href="autores.html">Autores</a></li>
                     <li class="nav-item"><a class="nav-link" href="categorias.html">Categorias</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link active" aria-current="page" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="historico.html">Usuários</a></li>
                 </ul>
 
                 <form class="d-flex search-box" role="search">
@@ -142,6 +144,7 @@
                                     </div>
                                     <div class="col-12"><div class="book-extra-heading"><span>Detalhes editoriais</span><small>Opcionais, mas deixam o catálogo mais completo.</small></div></div>
                                     <div class="col-md-8"><label for="capaUrl" class="form-label">URL da capa</label><input id="capaUrl" class="form-control form-book" type="url" maxlength="2048" placeholder="https://exemplo.com/capa.jpg"></div>
+                                    <div class="col-12"><label for="urlLeitura" class="form-label">Link externo de leitura</label><input id="urlLeitura" class="form-control form-book" type="url" maxlength="2048" placeholder="https://exemplo.com/livro-ou-pdf"><small class="form-text">Use uma página oficial ou um PDF público que você tenha autorização para compartilhar.</small></div>
                                     <div class="col-md-4"><label for="numeroPaginas" class="form-label">Número de páginas</label><input id="numeroPaginas" class="form-control form-book" type="number" min="1" placeholder="Ex.: 320"></div>
                                     <div class="col-md-4"><label for="idioma" class="form-label">Idioma</label><input id="idioma" class="form-control form-book" type="text" maxlength="100" placeholder="Ex.: Português"></div>
                                     <div class="col-md-4"><label for="editora" class="form-label">Editora</label><input id="editora" class="form-control form-book" type="text" maxlength="255" placeholder="Ex.: Alta Books"></div>

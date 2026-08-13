@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="assets/css/navbar.css">
     <link rel="stylesheet" href="assets/css/perfil.css?v=profile-visual-1">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <script src="assets/js/core/nav-preload.js?v=1"></script>
 </head>
 
 <body data-pagina="perfil" class="profile-page">
@@ -37,7 +38,8 @@
                     <li class="nav-item"><a class="nav-link" href="livros.html">Biblioteca</a></li>
                     <li class="nav-item"><a class="nav-link" href="autores.html">Autores</a></li>
                     <li class="nav-item"><a class="nav-link" href="categorias.html">Categorias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="adicionar.html">Adicionar</a></li>
+                    <li class="nav-item admin-only d-none"><a class="nav-link" href="historico.html">Usuários</a></li>
                 </ul>
 
                 <form class="d-flex search-box" role="search">
@@ -60,7 +62,7 @@
                         <p>Consulte seus dados, acompanhe a dimensão do acervo e encontre sempre uma nova história para descobrir.</p>
                         <div class="profile-hero-actions">
                             <a href="livros.html" class="profile-primary-action"><i class="bi bi-compass" aria-hidden="true"></i> Explorar biblioteca</a>
-                            <a href="adicionar.html" class="profile-secondary-action"><i class="bi bi-plus-lg" aria-hidden="true"></i> Adicionar livro</a>
+                            <a href="adicionar.html" class="profile-secondary-action admin-only d-none"><i class="bi bi-plus-lg" aria-hidden="true"></i> Adicionar livro</a>
                         </div>
                     </div>
 
@@ -94,7 +96,7 @@
                                 <span class="profile-label"><i class="bi bi-stars" aria-hidden="true"></i> Leitor BookVerse</span>
                                 <span class="profile-status"><i class="bi bi-check2-circle" aria-hidden="true"></i> Perfil ativo</span>
                             </div>
-                            <div class="profile-avatar" aria-hidden="true"><i class="bi bi-person-fill"></i></div>
+                            <div class="profile-avatar" aria-hidden="true"><img id="imagemPerfil" class="d-none" alt="Imagem do perfil"><i id="iconePerfil" class="bi bi-person-fill"></i></div>
                             <h2 id="nomeUsuario">Visitante</h2>
                             <p class="profile-registration">Matrícula <strong id="matriculaUsuario">—</strong></p>
                             <div class="profile-divider"></div>
@@ -109,7 +111,7 @@
                                     <h2>Informações do perfil</h2>
                                     <p>Dados que identificam sua experiência dentro do BookVerse.</p>
                                 </div>
-                                <span class="profile-details-symbol" aria-hidden="true"><i class="bi bi-fingerprint"></i></span>
+                                <div class="profile-details-actions"><button id="btnEditarPerfil" type="button" class="profile-edit-trigger"><i class="bi bi-pencil-square" aria-hidden="true"></i> Editar perfil</button><span class="profile-details-symbol" aria-hidden="true"><i class="bi bi-fingerprint"></i></span></div>
                             </header>
 
                             <div class="details-grid">
@@ -129,9 +131,27 @@
                                     <span class="detail-icon"><i class="bi bi-hash" aria-hidden="true"></i></span>
                                     <div><span>Código do usuário</span><strong id="idUsuario">Não informado</strong></div>
                                 </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon"><i class="bi bi-envelope" aria-hidden="true"></i></span>
+                                    <div><span>E-mail de acesso</span><strong id="emailUsuario">Não informado</strong></div>
+                                </div>
                             </div>
                         </article>
                     </div>
+
+                    <section id="edicaoPerfil" class="profile-edit-panel d-none" aria-labelledby="tituloEdicaoPerfil">
+                        <header><div><p class="profile-kicker"><i class="bi bi-pencil-square" aria-hidden="true"></i> Sua conta</p><h2 id="tituloEdicaoPerfil">Editar perfil</h2><p>Você pode alterar seus dados pessoais e usar uma imagem por URL.</p></div><button id="btnCancelarEdicaoPerfil" type="button" class="profile-edit-cancel">Cancelar</button></header>
+                        <div id="mensagemPerfil" class="profile-form-message d-none" data-base-class="profile-form-message" role="alert"></div>
+                        <form id="formEditarPerfil" novalidate>
+                            <div class="profile-edit-grid">
+                                <div><label for="nomePerfilEdicao">Nome</label><input id="nomePerfilEdicao" class="form-control" type="text" required maxlength="255"></div>
+                                <div><label for="sexoPerfilEdicao">Sexo</label><select id="sexoPerfilEdicao" class="form-select" required><option value="">Selecione</option><option>Feminino</option><option>Masculino</option><option>Prefiro não informar</option><option>Não informado</option></select></div>
+                                <div><label for="nascimentoPerfilEdicao">Data de nascimento</label><input id="nascimentoPerfilEdicao" class="form-control" type="date" required></div>
+                                <div><label for="imagemPerfilEdicao">Imagem de perfil <small>(opcional)</small></label><input id="imagemPerfilEdicao" class="form-control" type="url" maxlength="2048" placeholder="https://exemplo.com/foto.jpg"></div>
+                            </div>
+                            <button id="btnSalvarPerfil" class="profile-primary-action" type="submit"><i class="bi bi-check2-circle" aria-hidden="true"></i> Salvar alterações</button>
+                        </form>
+                    </section>
 
                     <section class="profile-library" aria-labelledby="tituloPerfilBiblioteca">
                         <header class="profile-library-title">
@@ -165,7 +185,7 @@
                     <section class="profile-shortcuts" aria-label="Atalhos da conta">
                         <a href="autores.html" class="profile-shortcut-card"><span class="profile-shortcut-icon"><i class="bi bi-person-heart" aria-hidden="true"></i></span><span><strong>Conheça autores</strong><small>Veja quem dá vida às histórias.</small></span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
                         <a href="categorias.html" class="profile-shortcut-card"><span class="profile-shortcut-icon"><i class="bi bi-grid" aria-hidden="true"></i></span><span><strong>Explore categorias</strong><small>Encontre seu próximo tema.</small></span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
-                        <a href="adicionar.html" class="profile-shortcut-card"><span class="profile-shortcut-icon"><i class="bi bi-journal-plus" aria-hidden="true"></i></span><span><strong>Amplie o acervo</strong><small>Cadastre uma nova obra.</small></span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+                        <a href="adicionar.html" class="profile-shortcut-card admin-only d-none"><span class="profile-shortcut-icon"><i class="bi bi-journal-plus" aria-hidden="true"></i></span><span><strong>Amplie o acervo</strong><small>Cadastre uma nova obra.</small></span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
                     </section>
                 </div>
 
