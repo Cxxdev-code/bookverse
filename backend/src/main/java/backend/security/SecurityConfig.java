@@ -38,6 +38,9 @@ public class SecurityConfig {
     @Value("${bookverse.cors.origins}")
     private String corsOrigins;
 
+    @Value("${bookverse.cors.origens-adicionais:}")
+    private String corsOrigensAdicionais;
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -78,7 +81,10 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuracao = new CorsConfiguration();
-        List<String> origens = Arrays.stream(corsOrigins.split(","))
+        String configuracaoOrigens = corsOrigensAdicionais.isBlank()
+                ? corsOrigins
+                : corsOrigins + "," + corsOrigensAdicionais;
+        List<String> origens = Arrays.stream(configuracaoOrigens.split(","))
                 .map(String::trim)
                 .filter(origem -> !origem.isBlank())
                 .toList();
