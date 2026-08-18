@@ -6,6 +6,7 @@ backend/data/
 
 # Saída de compilação.
 backend/target/
+frontend/.vercel/
 
 # Credenciais locais de deploy.
 .env
