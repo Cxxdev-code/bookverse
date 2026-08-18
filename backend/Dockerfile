@@ -12,4 +12,4 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "/app/app.jar"]
+ENTRYPOINT ["sh", "-c", "if [ \"$BOOKVERSE_DB_PORT\" = \"-1\" ] || [ -z \"$BOOKVERSE_DB_PORT\" ]; then export BOOKVERSE_DB_PORT=5432; fi; exec java -Dspring.profiles.active=prod -jar /app/app.jar"]
