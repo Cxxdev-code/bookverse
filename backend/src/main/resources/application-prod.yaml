@@ -21,7 +21,7 @@ bookverse:
       secret: ${BOOKVERSE_JWT_SECRET}
       expiracao-minutos: ${BOOKVERSE_JWT_EXPIRACAO_MINUTOS:120}
   cors:
-    origins: ${BOOKVERSE_CORS_ORIGINS}
+    origins: ${BOOKVERSE_CORS_ORIGINS:http://localhost:5500},https://frontend-ivory-ten-56.vercel.app
   admin:
     email: ${BOOKVERSE_ADMIN_EMAIL}
     senha: ${BOOKVERSE_ADMIN_SENHA}
