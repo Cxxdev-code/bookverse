@@ -221,6 +221,8 @@ BOOKVERSE_CORS_ORIGINS=https://seu-dominio.com
 
 O repositório está configurado para publicar o front-end no **Vercel** e a API no **Render**, com PostgreSQL persistente. Essa separação é necessária porque o front-end é estático, enquanto a API Java precisa ficar em execução e gravar dados em um banco gerenciado.
 
+Na primeira publicação, as migrações carregam os livros, autores e categorias atuais do catálogo local. Contas de usuários, senhas e tokens não são copiados para o ambiente público; o administrador de produção é criado pelas variáveis seguras configuradas no Render.
+
 1. No Render, importe o repositório como **Blueprint**. O arquivo `render.yaml` cria a API e o banco PostgreSQL, e solicita as variáveis administrativas e a origem permitida no CORS.
 2. Após a API estar disponível, copie seu endereço seguido de `/api`, por exemplo `https://bookverse-api.onrender.com/api`.
 3. No Vercel, importe o mesmo repositório, selecione `frontend` como **Root Directory** e cadastre `BOOKVERSE_API_URL` com a URL da etapa anterior.
