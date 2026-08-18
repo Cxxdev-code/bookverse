@@ -1,0 +1,50 @@
+services:
+  - type: web
+    name: bookverse-api
+    runtime: docker
+    plan: free
+    region: oregon
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: BOOKVERSE_DB_HOST
+        fromDatabase:
+          name: bookverse-db
+          property: host
+      - key: BOOKVERSE_DB_PORT
+        fromDatabase:
+          name: bookverse-db
+          property: port
+      - key: BOOKVERSE_DB_NAME
+        fromDatabase:
+          name: bookverse-db
+          property: database
+      - key: BOOKVERSE_DB_USER
+        fromDatabase:
+          name: bookverse-db
+          property: user
+      - key: BOOKVERSE_DB_PASSWORD
+        fromDatabase:
+          name: bookverse-db
+          property: password
+      - key: BOOKVERSE_JWT_SECRET
+        generateValue: true
+      - key: BOOKVERSE_CORS_ORIGINS
+        sync: false
+      - key: BOOKVERSE_ADMIN_EMAIL
+        sync: false
+      - key: BOOKVERSE_ADMIN_SENHA
+        sync: false
+      - key: BOOKVERSE_ADMIN_NOME
+        value: Administrador BookVerse
+
+databases:
+  - name: bookverse-db
+    plan: free
+    region: oregon
+    databaseName: bookverse
+    user: bookverse

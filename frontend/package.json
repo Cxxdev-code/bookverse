@@ -1,0 +1,11 @@
+{
+  "name": "bookverse-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node scripts/gerar-config-api.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

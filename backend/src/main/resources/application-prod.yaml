@@ -1,0 +1,27 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${BOOKVERSE_DB_HOST}:${BOOKVERSE_DB_PORT:5432}/${BOOKVERSE_DB_NAME}
+    username: ${BOOKVERSE_DB_USER}
+    password: ${BOOKVERSE_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  h2:
+    console:
+      enabled: false
+
+bookverse:
+  security:
+    jwt:
+      secret: ${BOOKVERSE_JWT_SECRET}
+      expiracao-minutos: ${BOOKVERSE_JWT_EXPIRACAO_MINUTOS:120}
+  cors:
+    origins: ${BOOKVERSE_CORS_ORIGINS}
+  admin:
+    email: ${BOOKVERSE_ADMIN_EMAIL}
+    senha: ${BOOKVERSE_ADMIN_SENHA}
+    nome: ${BOOKVERSE_ADMIN_NOME:Administrador BookVerse}

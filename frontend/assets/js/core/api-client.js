@@ -1,6 +1,7 @@
 import { limparSessao, obterToken } from "./session.js";
+import { API_URL_CONFIGURADA } from "./api-config.js";
 
-export const API_URL = "http://localhost:8080/api";
+export const API_URL = API_URL_CONFIGURADA;
 
 export class ApiError extends Error {
     constructor(message, status = 0, details = {}) {

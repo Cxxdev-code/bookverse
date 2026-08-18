@@ -91,7 +91,8 @@ O front-end usa **MVC com JavaScript nativo**, separando models, views e control
 ┌────────────────────────────────────────────────────────────┐
 │ Back-end                                                     │
 │ Spring Boot • Spring Web • Spring Security • JPA             │
-│ Controllers → Services → Repositories → H2                   │
+│ Controllers → Services → Repositories → H2 (local) /         │
+│ PostgreSQL (produção)                                        │
 └───────────────────────────┬────────────────────────────────┘
                             │
                             ▼
@@ -125,7 +126,7 @@ bookverse/
 | Front-end | HTML5, CSS3, Bootstrap, Bootstrap Icons, JavaScript ES Modules |
 | Back-end | Java 21, Spring Boot, Spring Web, Spring Data JPA, Bean Validation |
 | Segurança | Spring Security, BCrypt e JSON Web Token (JWT) |
-| Dados | H2, Flyway e suporte a MySQL no projeto |
+| Dados | H2 local, PostgreSQL em produção, Flyway e suporte a MySQL |
 | Qualidade | JUnit, Spring Boot Test e MockMvc |
 | Documentação de API | Swagger / OpenAPI |
 
@@ -216,6 +217,17 @@ BOOKVERSE_JWT_SECRET=uma-chave-privada-com-pelo-menos-32-caracteres
 BOOKVERSE_CORS_ORIGINS=https://seu-dominio.com
 ```
 
+## Publicação
+
+O repositório está configurado para publicar o front-end no **Vercel** e a API no **Render**, com PostgreSQL persistente. Essa separação é necessária porque o front-end é estático, enquanto a API Java precisa ficar em execução e gravar dados em um banco gerenciado.
+
+1. No Render, importe o repositório como **Blueprint**. O arquivo `render.yaml` cria a API e o banco PostgreSQL, e solicita as variáveis administrativas e a origem permitida no CORS.
+2. Após a API estar disponível, copie seu endereço seguido de `/api`, por exemplo `https://bookverse-api.onrender.com/api`.
+3. No Vercel, importe o mesmo repositório, selecione `frontend` como **Root Directory** e cadastre `BOOKVERSE_API_URL` com a URL da etapa anterior.
+4. Copie a URL final do Vercel para `BOOKVERSE_CORS_ORIGINS` no Render e faça uma nova publicação da API.
+
+As variáveis sensíveis nunca são versionadas. O banco gratuito do Render é adequado para demonstração de portfólio, mas expira após 30 dias; para uma aplicação permanente, escolha um plano com persistência contínua.
+
 ## Leitura por PDF ou link externo
 
 O projeto ainda não hospeda arquivos PDF no servidor. Para disponibilizar uma obra, o administrador pode enviar o arquivo para uma fonte autorizada — por exemplo, um armazenamento próprio ou Google Drive com acesso público — e cadastrar a URL no campo **Link externo de leitura**.
@@ -240,7 +252,6 @@ Veja o guia completo em [Leitura externa](docs/LEITURA_EXTERNA.md).
 - Leitura interna por capítulos ou páginas;
 - Favoritos, avaliações e progresso de leitura;
 - Recuperação e alteração de senha;
-- Publicação em ambiente de produção com PostgreSQL ou MySQL;
 - Conta de demonstração com permissões controladas para o portfólio.
 
 ## Autor

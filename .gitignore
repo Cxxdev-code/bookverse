@@ -6,3 +6,8 @@ backend/data/
 
 # Saída de compilação.
 backend/target/
+
+# Credenciais locais de deploy.
+.env
+.env.*
+!*.env.example
