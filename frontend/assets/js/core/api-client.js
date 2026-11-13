@@ -1,5 +1,5 @@
 import { limparSessao, obterToken } from "./session.js";
-import { API_URL_CONFIGURADA } from "./api-config.js";
+import { API_URL_CONFIGURADA } from "./api-config.js?v=production-2";
 
 export const API_URL = API_URL_CONFIGURADA;
 
