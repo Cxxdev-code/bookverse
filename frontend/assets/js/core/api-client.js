@@ -1,7 +1,7 @@
 import { limparSessao, obterToken } from "./session.js";
 import { API_URL_CONFIGURADA } from "./api-config.js?v=production-2";
 
-export const API_URL = API_URL_CONFIGURADA;
+export const API_URL = API_URL_CONFIGURADA.includes("localhost:8080") ? "https://bookverse-api-2.onrender.com/api" : API_URL_CONFIGURADA;
 
 export class ApiError extends Error {
     constructor(message, status = 0, details = {}) {
