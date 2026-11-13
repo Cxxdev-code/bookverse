@@ -1,2 +1,2 @@
 // Arquivo gerado no build. Nao edite manualmente.
-export const API_URL_CONFIGURADA = "http://localhost:8080/api";
+export const API_URL_CONFIGURADA = "https://bookverse-api-zmwx.onrender.com/api";
