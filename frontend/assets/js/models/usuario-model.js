@@ -1,4 +1,4 @@
-import { requisicao } from "../core/api-client.js";
+import { requisicao } from "../core/api-client.js?v=production-3";
 
 export const UsuarioModel = {
     meuPerfil: () => requisicao("/usuarios/me"),
