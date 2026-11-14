@@ -1,4 +1,4 @@
-import { escaparHtml, porId } from "../core/dom.js";
+import { escaparHtml, porId } from "../core/dom.js?v=deploy-20261114";
 
 function dataHora(valor, fallback = "Ainda não acessou") {
     if (!valor) return fallback;

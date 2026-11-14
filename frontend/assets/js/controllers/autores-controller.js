@@ -1,6 +1,6 @@
-import { AutorModel } from "../models/autor-model.js";
-import { definirTexto, escaparHtml, porId } from "../core/dom.js";
-import { renderizarAutores } from "../views/autor-view.js";
+import { AutorModel } from "../models/autor-model.js?v=deploy-20261114";
+import { definirTexto, escaparHtml, porId } from "../core/dom.js?v=deploy-20261114";
+import { renderizarAutores } from "../views/autor-view.js?v=deploy-20261114";
 
 async function iniciar() {
     const carregando = porId("carregandoAutores");

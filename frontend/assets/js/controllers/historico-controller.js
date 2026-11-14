@@ -1,6 +1,6 @@
-import { UsuarioModel } from "../models/usuario-model.js";
-import { escaparHtml, porId } from "../core/dom.js";
-import { renderizarHistoricoUsuarios } from "../views/historico-view.js";
+import { UsuarioModel } from "../models/usuario-model.js?v=deploy-20261114";
+import { escaparHtml, porId } from "../core/dom.js?v=deploy-20261114";
+import { renderizarHistoricoUsuarios } from "../views/historico-view.js?v=deploy-20261114";
 
 export async function iniciarHistorico() {
     const carregando = porId("carregandoHistorico");

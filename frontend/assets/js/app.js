@@ -1,14 +1,14 @@
-import { iniciarHome } from "./controllers/home-controller.js?v=20261114";
-import { iniciarLivros } from "./controllers/livros-controller.js?v=20261114";
-import { iniciarAutores } from "./controllers/autores-controller.js";
-import { iniciarCategorias } from "./controllers/categorias-controller.js";
-import { iniciarAdicionar } from "./controllers/adicionar-controller.js?v=20261114";
-import { iniciarLogin } from "./controllers/login-controller.js?v=20261114";
-import { iniciarPerfil } from "./controllers/perfil-controller.js?v=20261114";
-import { iniciarLeitura } from "./controllers/leitura-controller.js";
-import { iniciarHistorico } from "./controllers/historico-controller.js";
-import { iniciarNavegacao } from "./core/navegacao.js";
-import { ehAdministrador, obterUsuarioAtivo } from "./core/session.js";
+import { iniciarHome } from "./controllers/home-controller.js?v=deploy-20261114";
+import { iniciarLivros } from "./controllers/livros-controller.js?v=deploy-20261114";
+import { iniciarAutores } from "./controllers/autores-controller.js?v=deploy-20261114";
+import { iniciarCategorias } from "./controllers/categorias-controller.js?v=deploy-20261114";
+import { iniciarAdicionar } from "./controllers/adicionar-controller.js?v=deploy-20261114";
+import { iniciarLogin } from "./controllers/login-controller.js?v=deploy-20261114";
+import { iniciarPerfil } from "./controllers/perfil-controller.js?v=deploy-20261114";
+import { iniciarLeitura } from "./controllers/leitura-controller.js?v=deploy-20261114";
+import { iniciarHistorico } from "./controllers/historico-controller.js?v=deploy-20261114";
+import { iniciarNavegacao } from "./core/navegacao.js?v=deploy-20261114";
+import { ehAdministrador, obterUsuarioAtivo } from "./core/session.js?v=deploy-20261114";
 
 const controladores = {
     home: iniciarHome, livros: iniciarLivros, autores: iniciarAutores, categorias: iniciarCategorias,

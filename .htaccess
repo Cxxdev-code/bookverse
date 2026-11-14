@@ -1,0 +1,22 @@
+# Hostinger (deploy via GitHub): o repositorio inteiro fica em public_html.
+# Este arquivo serve a pasta frontend/ na raiz do site e bloqueia o resto.
+
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Forca HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Bloqueia tudo que nao e o site (codigo do backend, banco, docs, configs)
+    RewriteRule ^(backend|data|docs|deploy|\.github|\.vscode|\.git)(/|$) - [F,L]
+    RewriteRule ^[^/]+\.(md|ya?ml|json|db|sql|properties)$ - [F,L]
+    RewriteRule ^\.git - [F,L]
+
+    # Serve o frontend na raiz: /login.html -> /frontend/login.html
+    RewriteCond %{REQUEST_URI} !^/frontend/
+    RewriteRule ^(.*)$ frontend/$1 [L]
+</IfModule>

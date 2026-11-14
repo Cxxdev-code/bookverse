@@ -1,4 +1,4 @@
-import { ehAdministrador, limparSessao, obterUsuarioAtivo } from "./session.js";
+import { ehAdministrador, limparSessao, obterUsuarioAtivo } from "./session.js?v=deploy-20261114";
 
 function configurarBusca(pagina) {
     if (pagina === "livros") return;

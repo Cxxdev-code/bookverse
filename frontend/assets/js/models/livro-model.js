@@ -1,4 +1,4 @@
-import { requisicao } from "../core/api-client.js?v=20261114";
+import { requisicao } from "../core/api-client.js?v=deploy-20261114";
 
 export const LivroModel = {
     listarCatalogo: ({ page = 0, size = 12, busca = "", categoriaId, autorId, ordem = "recentes" } = {}) => {

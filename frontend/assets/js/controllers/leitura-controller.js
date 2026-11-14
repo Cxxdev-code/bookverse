@@ -1,5 +1,5 @@
-import { LivroModel } from "../models/livro-model.js";
-import { mostrarErroLeitura, renderizarLivroLeitura } from "../views/leitura-view.js";
+import { LivroModel } from "../models/livro-model.js?v=deploy-20261114";
+import { mostrarErroLeitura, renderizarLivroLeitura } from "../views/leitura-view.js?v=deploy-20261114";
 
 function obterIdLivro() {
     const valor = new URLSearchParams(window.location.search).get("id");

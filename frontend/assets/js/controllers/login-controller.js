@@ -1,7 +1,7 @@
-import { AuthModel } from "../models/auth-model.js";
-import { definirCarregando, mostrarMensagem, ocultarMensagem, porId } from "../core/dom.js";
-import { obterUsuarioAtivo, salvarSessao } from "../core/session.js";
-import { alterarModoAuth } from "../views/auth-view.js";
+import { AuthModel } from "../models/auth-model.js?v=deploy-20261114";
+import { definirCarregando, mostrarMensagem, ocultarMensagem, porId } from "../core/dom.js?v=deploy-20261114";
+import { obterUsuarioAtivo, salvarSessao } from "../core/session.js?v=deploy-20261114";
+import { alterarModoAuth } from "../views/auth-view.js?v=deploy-20261114";
 
 function destinoAposLogin() {
     const retorno = new URLSearchParams(window.location.search).get("retorno");

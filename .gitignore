@@ -12,3 +12,6 @@ frontend/.vercel/
 .env
 .env.*
 !*.env.example
+
+# Pacotes gerados para upload manual na Hostinger.
+deploy/

@@ -1,0 +1,35 @@
+# Configuracao para hospedagem Hostinger (Apache/LiteSpeed)
+
+DirectoryIndex index.html
+Options -Indexes
+
+# Forca HTTPS
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Tipos corretos para modulos JS
+<IfModule mod_mime.c>
+    AddType application/javascript .js .mjs
+    AddType text/css .css
+</IfModule>
+
+# Cache: imagens por 1 ano; JS/CSS revalidam (o front usa imports com ?v=)
+<IfModule mod_headers.c>
+    <FilesMatch "\.(png|jpe?g|gif|webp|svg|ico)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    <FilesMatch "\.(js|css)$">
+        Header set Cache-Control "public, max-age=0, must-revalidate"
+    </FilesMatch>
+    <FilesMatch "\.html$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+</IfModule>
+
+# Bloqueia arquivos que nao devem ser publicos
+<FilesMatch "^(package\.json|vercel\.json)$">
+    Require all denied
+</FilesMatch>

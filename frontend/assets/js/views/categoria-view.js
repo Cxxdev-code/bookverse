@@ -1,4 +1,4 @@
-import { escaparHtml, porId } from "../core/dom.js";
+import { escaparHtml, porId } from "../core/dom.js?v=deploy-20261114";
 
 const icones = ["bi-bookmark-star-fill", "bi-lightbulb-fill", "bi-rocket-takeoff-fill", "bi-heart-fill", "bi-cpu-fill", "bi-globe-americas"];
 

@@ -22,7 +22,7 @@ bookverse:
       expiracao-minutos: ${BOOKVERSE_JWT_EXPIRACAO_MINUTOS:120}
   cors:
     origins: ${BOOKVERSE_CORS_ORIGINS:http://localhost:5500}
-    origens-adicionais: ${BOOKVERSE_CORS_ORIGINS_ADICIONAIS:https://frontend-ivory-ten-56.vercel.app}
+    origens-adicionais: ${BOOKVERSE_CORS_ORIGINS_ADICIONAIS:https://goldenrod-locust-209324.hostingersite.com,https://frontend-ivory-ten-56.vercel.app}
   admin:
     email: ${BOOKVERSE_ADMIN_EMAIL}
     senha: ${BOOKVERSE_ADMIN_SENHA}

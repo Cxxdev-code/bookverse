@@ -1,8 +1,8 @@
-import { AutorModel } from "../models/autor-model.js";
-import { CategoriaModel } from "../models/categoria-model.js";
-import { LivroModel } from "../models/livro-model.js";
-import { definirCarregando, mostrarMensagem, ocultarMensagem, porId } from "../core/dom.js";
-import { alterarModoRelacionamento, preencherSelect, renderizarEtapas } from "../views/form-view.js";
+import { AutorModel } from "../models/autor-model.js?v=deploy-20261114";
+import { CategoriaModel } from "../models/categoria-model.js?v=deploy-20261114";
+import { LivroModel } from "../models/livro-model.js?v=deploy-20261114";
+import { definirCarregando, mostrarMensagem, ocultarMensagem, porId } from "../core/dom.js?v=deploy-20261114";
+import { alterarModoRelacionamento, preencherSelect, renderizarEtapas } from "../views/form-view.js?v=deploy-20261114";
 
 const estado = { modoAutor: "existente", modoCategoria: "existente", edicaoId: null };
 

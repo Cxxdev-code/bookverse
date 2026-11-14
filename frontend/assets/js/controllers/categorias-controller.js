@@ -1,7 +1,7 @@
-import { CategoriaModel } from "../models/categoria-model.js";
-import { LivroModel } from "../models/livro-model.js";
-import { definirTexto, escaparHtml, porId } from "../core/dom.js";
-import { renderizarCategorias } from "../views/categoria-view.js";
+import { CategoriaModel } from "../models/categoria-model.js?v=deploy-20261114";
+import { LivroModel } from "../models/livro-model.js?v=deploy-20261114";
+import { definirTexto, escaparHtml, porId } from "../core/dom.js?v=deploy-20261114";
+import { renderizarCategorias } from "../views/categoria-view.js?v=deploy-20261114";
 
 async function iniciar() {
     const carregando = porId("carregandoCategorias");

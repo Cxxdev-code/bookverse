@@ -1,4 +1,4 @@
-import { requisicao } from "../core/api-client.js?v=20261114";
+import { requisicao } from "../core/api-client.js?v=deploy-20261114";
 
 export const UsuarioModel = {
     meuPerfil: () => requisicao("/usuarios/me"),

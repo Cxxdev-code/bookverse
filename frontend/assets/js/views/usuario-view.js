@@ -1,4 +1,4 @@
-import { definirTexto, formatarData, porId } from "../core/dom.js";
+import { definirTexto, formatarData, porId } from "../core/dom.js?v=deploy-20261114";
 
 function imagemSegura(url) {
     return /^(https?:\/\/|assets\/)/i.test(String(url || "").trim()) ? String(url).trim() : null;

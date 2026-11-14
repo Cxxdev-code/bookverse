@@ -1,7 +1,7 @@
-import { LivroModel } from "../models/livro-model.js";
-import { CategoriaModel } from "../models/categoria-model.js";
-import { definirTexto, escaparHtml, porId } from "../core/dom.js";
-import { renderizarDetalhesLivro, renderizarFiltrosCategorias, renderizarLivros, renderizarPaginacao } from "../views/livro-view.js?v=20261114";
+import { LivroModel } from "../models/livro-model.js?v=deploy-20261114";
+import { CategoriaModel } from "../models/categoria-model.js?v=deploy-20261114";
+import { definirTexto, escaparHtml, porId } from "../core/dom.js?v=deploy-20261114";
+import { renderizarDetalhesLivro, renderizarFiltrosCategorias, renderizarLivros, renderizarPaginacao } from "../views/livro-view.js?v=deploy-20261114";
 
 const estado = { categorias: [], pagina: 0, tamanho: 12, busca: "", categoriaId: null, ordem: "recentes" };
 let temporizadorPesquisa;

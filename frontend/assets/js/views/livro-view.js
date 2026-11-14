@@ -1,5 +1,5 @@
-import { escaparHtml, formatarData, porId } from "../core/dom.js";
-import { ehAdministrador } from "../core/session.js";
+import { escaparHtml, formatarData, porId } from "../core/dom.js?v=deploy-20261114";
+import { ehAdministrador } from "../core/session.js?v=deploy-20261114";
 
 function resumo(texto, limite = 118) {
     const valor = texto || "Descrição não informada.";

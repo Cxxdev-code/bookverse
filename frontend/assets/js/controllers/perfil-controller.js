@@ -1,8 +1,8 @@
-import { LivroModel } from "../models/livro-model.js";
-import { UsuarioModel } from "../models/usuario-model.js";
-import { atualizarUsuarioAtivo } from "../core/session.js";
-import { definirCarregando, escaparHtml, mostrarMensagem, ocultarMensagem, porId } from "../core/dom.js";
-import { renderizarPerfil, preencherFormularioPerfil } from "../views/usuario-view.js";
+import { LivroModel } from "../models/livro-model.js?v=deploy-20261114";
+import { UsuarioModel } from "../models/usuario-model.js?v=deploy-20261114";
+import { atualizarUsuarioAtivo } from "../core/session.js?v=deploy-20261114";
+import { definirCarregando, escaparHtml, mostrarMensagem, ocultarMensagem, porId } from "../core/dom.js?v=deploy-20261114";
+import { renderizarPerfil, preencherFormularioPerfil } from "../views/usuario-view.js?v=deploy-20261114";
 
 let usuarioAtual;
 
