@@ -1,7 +1,12 @@
 import { limparSessao, obterToken } from "./session.js";
-import { API_URL_CONFIGURADA } from "./api-config.js?v=production-2";
+import { API_URL_CONFIGURADA } from "./api-config.js?v=20261114";
 
-export const API_URL = API_URL_CONFIGURADA.includes("localhost:8080") ? "https://bookverse-api-2.onrender.com/api" : API_URL_CONFIGURADA;
+const API_PRODUCAO = "https://bookverse-api-2.onrender.com/api";
+const rodandoLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+const configuradaApontaParaLocal = /localhost|127\.0\.0\.1/.test(API_URL_CONFIGURADA);
+
+// Site publicado nunca deve chamar localhost; no computador local usa a URL configurada.
+export const API_URL = !rodandoLocal && configuradaApontaParaLocal ? API_PRODUCAO : API_URL_CONFIGURADA;
 
 export class ApiError extends Error {
     constructor(message, status = 0, details = {}) {

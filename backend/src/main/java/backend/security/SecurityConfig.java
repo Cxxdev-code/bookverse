@@ -88,7 +88,7 @@ public class SecurityConfig {
                 .map(String::trim)
                 .filter(origem -> !origem.isBlank())
                 .toList();
-        configuracao.setAllowedOrigins(origens);
+        configuracao.setAllowedOriginPatterns(origens);
         configuracao.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuracao.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
         configuracao.setExposedHeaders(List.of("Authorization"));

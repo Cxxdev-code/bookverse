@@ -1,7 +1,7 @@
 import { LivroModel } from "../models/livro-model.js";
 import { escaparHtml, porId } from "../core/dom.js";
-import { renderizarDetalhesLivro, renderizarLivros } from "../views/livro-view.js?v=catalogo-api-1";
-import { renderizarCategoriasHome, renderizarResumoHome, renderizarTagsHome } from "../views/home-view.js?v=catalogo-api-1";
+import { renderizarDetalhesLivro, renderizarLivros } from "../views/livro-view.js?v=20261114";
+import { renderizarCategoriasHome, renderizarResumoHome, renderizarTagsHome } from "../views/home-view.js?v=20261114";
 
 function configurarEventos() {
     porId("listaLivros")?.addEventListener("click", async evento => {

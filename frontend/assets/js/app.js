@@ -1,10 +1,10 @@
-import { iniciarHome } from "./controllers/home-controller.js?v=security-1";
-import { iniciarLivros } from "./controllers/livros-controller.js?v=security-1";
+import { iniciarHome } from "./controllers/home-controller.js?v=20261114";
+import { iniciarLivros } from "./controllers/livros-controller.js?v=20261114";
 import { iniciarAutores } from "./controllers/autores-controller.js";
 import { iniciarCategorias } from "./controllers/categorias-controller.js";
-import { iniciarAdicionar } from "./controllers/adicionar-controller.js?v=security-1";
-import { iniciarLogin } from "./controllers/login-controller.js?v=security-1";
-import { iniciarPerfil } from "./controllers/perfil-controller.js?v=security-1";
+import { iniciarAdicionar } from "./controllers/adicionar-controller.js?v=20261114";
+import { iniciarLogin } from "./controllers/login-controller.js?v=20261114";
+import { iniciarPerfil } from "./controllers/perfil-controller.js?v=20261114";
 import { iniciarLeitura } from "./controllers/leitura-controller.js";
 import { iniciarHistorico } from "./controllers/historico-controller.js";
 import { iniciarNavegacao } from "./core/navegacao.js";
