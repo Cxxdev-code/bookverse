@@ -1,4 +1,4 @@
-import { porId } from "../core/dom.js?v=deploy-20261114";
+import { porId } from "../core/dom.js?v=deploy-20261114-2";
 
 export function alterarModoAuth(modo) {
     const entrar = modo === "entrar";

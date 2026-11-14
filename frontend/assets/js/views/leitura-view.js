@@ -1,4 +1,4 @@
-import { definirTexto, escaparHtml, formatarData, porId } from "../core/dom.js?v=deploy-20261114";
+import { definirTexto, escaparHtml, formatarData, porId } from "../core/dom.js?v=deploy-20261114-2";
 
 function capaSegura(valor) {
     const capa = String(valor || "").trim();

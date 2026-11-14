@@ -1,20 +1,30 @@
-import { iniciarHome } from "./controllers/home-controller.js?v=deploy-20261114";
-import { iniciarLivros } from "./controllers/livros-controller.js?v=deploy-20261114";
-import { iniciarAutores } from "./controllers/autores-controller.js?v=deploy-20261114";
-import { iniciarCategorias } from "./controllers/categorias-controller.js?v=deploy-20261114";
-import { iniciarAdicionar } from "./controllers/adicionar-controller.js?v=deploy-20261114";
-import { iniciarLogin } from "./controllers/login-controller.js?v=deploy-20261114";
-import { iniciarPerfil } from "./controllers/perfil-controller.js?v=deploy-20261114";
-import { iniciarLeitura } from "./controllers/leitura-controller.js?v=deploy-20261114";
-import { iniciarHistorico } from "./controllers/historico-controller.js?v=deploy-20261114";
-import { iniciarNavegacao } from "./core/navegacao.js?v=deploy-20261114";
-import { ehAdministrador, obterUsuarioAtivo } from "./core/session.js?v=deploy-20261114";
+import { iniciarHome } from "./controllers/home-controller.js?v=deploy-20261114-2";
+import { iniciarLivros } from "./controllers/livros-controller.js?v=deploy-20261114-2";
+import { iniciarAutores } from "./controllers/autores-controller.js?v=deploy-20261114-2";
+import { iniciarCategorias } from "./controllers/categorias-controller.js?v=deploy-20261114-2";
+import { iniciarAdicionar } from "./controllers/adicionar-controller.js?v=deploy-20261114-2";
+import { iniciarLogin } from "./controllers/login-controller.js?v=deploy-20261114-2";
+import { iniciarPerfil } from "./controllers/perfil-controller.js?v=deploy-20261114-2";
+import { iniciarLeitura } from "./controllers/leitura-controller.js?v=deploy-20261114-2";
+import { iniciarHistorico } from "./controllers/historico-controller.js?v=deploy-20261114-2";
+import { iniciarNavegacao } from "./core/navegacao.js?v=deploy-20261114-2";
+import { ehAdministrador, obterUsuarioAtivo } from "./core/session.js?v=deploy-20261114-2";
 
 const controladores = {
     home: iniciarHome, livros: iniciarLivros, autores: iniciarAutores, categorias: iniciarCategorias,
     adicionar: iniciarAdicionar, login: iniciarLogin, perfil: iniciarPerfil, leitura: iniciarLeitura,
     historico: iniciarHistorico
 };
+
+// Se uma capa externa falhar (link quebrado ou bloqueado), mostra a capa padrão.
+const CAPA_PADRAO = "assets/img/capa.png";
+document.addEventListener("error", evento => {
+    const imagem = evento.target;
+    if (!(imagem instanceof HTMLImageElement) || imagem.dataset.capaPadrao) return;
+    if (!/^Capa de /.test(imagem.alt || "")) return;
+    imagem.dataset.capaPadrao = "1";
+    imagem.src = CAPA_PADRAO;
+}, true);
 
 const pagina = document.body.dataset.pagina;
 const paginasProtegidas = new Set(["home", "livros", "autores", "categorias", "perfil", "leitura", "adicionar", "historico"]);

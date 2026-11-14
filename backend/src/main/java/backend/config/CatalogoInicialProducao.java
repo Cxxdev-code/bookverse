@@ -70,13 +70,13 @@ public class CatalogoInicialProducao {
             livroRepository.save(livro("8593156630", "Arte da Guerra",
                     "Um tratado clássico sobre estratégia, liderança e tomada de decisão em cenários de conflito.",
                     LocalDate.of(2018, 8, 6), documentoHistorico, sunTzu,
-                    "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1558405815i/44254181.jpg",
+                    "https://covers.openlibrary.org/b/isbn/8593156630-L.jpg",
                     "https://drive.google.com/file/d/18djvXRuIh3WKd-UmG3Kc7jGrqSaB8tAL/view?usp=sharing",
                     146, "Português", "Buzz Editora", "1ª edição", true));
             livroRepository.save(livro("978-6555523560", "A Odisseia",
                     "Poema épico sobre a longa viagem de retorno de Odisseu após a Guerra de Troia.",
                     LocalDate.of(2021, 6, 14), mitologia, homero,
-                    "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1601350472i/55455680.jpg",
+                    "https://covers.openlibrary.org/b/id/15129215-L.jpg",
                     "https://drive.google.com/file/d/1R9apkVAgmpzH1A2dw47FIg6u8LOPqAun/view?usp=sharing",
                     398, "Português", "Penguin Companhia", "1ª edição", false));
             livroRepository.save(livro("978-8594541758", "Alice no País das Maravilhas",

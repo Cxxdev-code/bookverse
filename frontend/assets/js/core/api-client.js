@@ -1,5 +1,5 @@
-import { limparSessao, obterToken } from "./session.js?v=deploy-20261114";
-import { API_URL_CONFIGURADA } from "./api-config.js?v=deploy-20261114";
+import { limparSessao, obterToken } from "./session.js?v=deploy-20261114-2";
+import { API_URL_CONFIGURADA } from "./api-config.js?v=deploy-20261114-2";
 
 const API_PRODUCAO = "https://bookverse-api-2.onrender.com/api";
 const rodandoLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);

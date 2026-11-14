@@ -1,4 +1,4 @@
-import { requisicao } from "../core/api-client.js?v=deploy-20261114";
+import { requisicao } from "../core/api-client.js?v=deploy-20261114-2";
 
 export const AutorModel = {
     listar: () => requisicao("/autores/todos"),

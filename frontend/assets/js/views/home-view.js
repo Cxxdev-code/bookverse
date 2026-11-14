@@ -1,4 +1,4 @@
-import { definirTexto, escaparHtml, porId } from "../core/dom.js?v=deploy-20261114";
+import { definirTexto, escaparHtml, porId } from "../core/dom.js?v=deploy-20261114-2";
 
 const iconesCategorias = [
     "bi-grid-1x2-fill",

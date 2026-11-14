@@ -1,8 +1,8 @@
-import { AutorModel } from "../models/autor-model.js?v=deploy-20261114";
-import { CategoriaModel } from "../models/categoria-model.js?v=deploy-20261114";
-import { LivroModel } from "../models/livro-model.js?v=deploy-20261114";
-import { definirCarregando, mostrarMensagem, ocultarMensagem, porId } from "../core/dom.js?v=deploy-20261114";
-import { alterarModoRelacionamento, preencherSelect, renderizarEtapas } from "../views/form-view.js?v=deploy-20261114";
+import { AutorModel } from "../models/autor-model.js?v=deploy-20261114-2";
+import { CategoriaModel } from "../models/categoria-model.js?v=deploy-20261114-2";
+import { LivroModel } from "../models/livro-model.js?v=deploy-20261114-2";
+import { definirCarregando, mostrarMensagem, ocultarMensagem, porId } from "../core/dom.js?v=deploy-20261114-2";
+import { alterarModoRelacionamento, preencherSelect, renderizarEtapas } from "../views/form-view.js?v=deploy-20261114-2";
 
 const estado = { modoAutor: "existente", modoCategoria: "existente", edicaoId: null };
 

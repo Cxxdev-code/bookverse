@@ -1,4 +1,4 @@
-import { escaparHtml, formatarData, porId } from "../core/dom.js?v=deploy-20261114";
+import { escaparHtml, formatarData, porId } from "../core/dom.js?v=deploy-20261114-2";
 
 export function renderizarAutores(autores) {
     const lista = porId("listaAutores");
