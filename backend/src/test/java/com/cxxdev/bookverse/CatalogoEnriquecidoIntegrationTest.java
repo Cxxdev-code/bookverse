@@ -22,7 +22,10 @@ import com.cxxdev.bookverse.service.HomeService;
 
 @SpringBootTest(properties = {
         "spring.datasource.url=jdbc:h2:mem:catalogo_enriquecido_teste;DB_CLOSE_DELAY=-1",
-        "spring.jpa.hibernate.ddl-auto=update"
+        "spring.jpa.hibernate.ddl-auto=update",
+        // Este teste monta o próprio cenário; sem isso, o seed do catálogo via
+        // Flyway (V5__catalogo_ampliado) polui as contagens e quebra as asserções.
+        "spring.flyway.enabled=false"
 })
 class CatalogoEnriquecidoIntegrationTest {
 
