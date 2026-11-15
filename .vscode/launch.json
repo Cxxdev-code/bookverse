@@ -2,11 +2,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-GestaoCustosApplication<gestao-custos>",
+            "name": "Spring Boot-BookverseApplication<bookverse>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "backend.GestaoCustosApplication",
-            "projectName": "gestao-custos",
+            "mainClass": "com.cxxdev.bookverse.BookverseApplication",
+            "projectName": "bookverse",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

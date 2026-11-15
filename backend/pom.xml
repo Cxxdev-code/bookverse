@@ -8,10 +8,10 @@
 		<version>4.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.javadevweek</groupId>
-	<artifactId>gestao-custos</artifactId>
+	<groupId>com.cxxdev</groupId>
+	<artifactId>bookverse</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
+	<name>bookverse</name>
 	<description/>
 	<url/>
 	<licenses>
