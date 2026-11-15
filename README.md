@@ -23,6 +23,12 @@
   <a href="#documentação">Documentação</a>
 </p>
 
+<p align="center">
+  <b>🔗 Acesse o projeto no ar:</b> <a href="https://frontend-ivory-ten-56.vercel.app">frontend-ivory-ten-56.vercel.app</a>
+  <br />
+  <sub>API hospedada no Render (plano gratuito: a primeira requisição pode levar ~1 min para "acordar")</sub>
+</p>
+
 ---
 
 ## Sobre o projeto
@@ -30,6 +36,17 @@
 O **BookVerse** é uma aplicação web de biblioteca digital desenvolvida para demonstrar uma arquitetura full stack organizada. O usuário pode explorar o catálogo, pesquisar livros, conhecer autores e categorias, manter um perfil e acessar fontes externas de leitura. Administradores possuem uma área exclusiva para gerenciar o acervo e consultar o histórico de contas.
 
 O front-end usa **MVC com JavaScript nativo**, separando models, views e controllers. O back-end é uma **API REST em Spring Boot**, com regras de negócio, validações, paginação, migrações de banco e controle de acesso por papel.
+
+## Screenshots
+
+<!--
+  Adicione prints das telas principais em docs/screenshots/ e referencie aqui.
+  Sugestão: Home, Biblioteca com filtros, Detalhe do livro e Área administrativa.
+  Exemplo:
+  ![Home do BookVerse](docs/screenshots/home.png)
+-->
+
+> 📸 _Prints das telas principais em breve. Enquanto isso, veja o projeto funcionando no [link acima](#readme)._
 
 ## Funcionalidades
 
